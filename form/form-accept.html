@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSVP - Mariage à Palma</title>
+  <link rel="stylesheet" href="../ressources/css/style.css"> <!-- Fixed path -->
+  <link rel="stylesheet" href="../ressources/css/style-form-accepted.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script rel="script" src="../script/script-form-accepted.js"></script>
+  <!-- Protéger le formulaire contre le spam -->
+  <input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off">
+  <input type="hidden" name="timestamp" id="timestamp"> <!-- Détection de rapidité de soumission -->
+</head>
+
+<body>
+  <div class="overlay">
+    <h1>Merci de partager cette belle aventure avec nous !</h1>
+    <form id="weddingForm" action="http://localhost:8000/server/handle-form.php" method="POST"
+      onsubmit="return confirmSubmission(event)">
+      <input type="hidden" name="presence" value="oui">
+
+      <!-- START : Informations personnelles -->
+      <div class="form-group">
+        <h3 style="margin-bottom: 0;">Vos informations</h3>
+        <div class="inline-fields">
+          <div style="width: 100%;">
+            <label>Prénom <span style="color: #EFA8B4; font-weight: bold;">*</span></label>
+            <input type="text" name="prenom" required>
+          </div>
+          <div style="width: 100%;">
+            <label>Nom <span style="color: #EFA8B4; font-weight: bold;">*</span></label>
+            <input type="text" name="nom" required>
+          </div>
+        </div>
+
+        <label>Adresse e-mail <span style="color: #EFA8B4; font-weight: bold;">*</span></label>
+        <input type="email" name="email" required>
+
+        <label>Numéro de téléphone <span style="color: #EFA8B4; font-weight: bold;">*</span></label>
+        <div class="inline-fields">
+          <div class="custom-select">
+            <select name="indicatif" class="inline-medium" required>
+              <option value="+33">🇫🇷 +33 (France)</option>
+              <option value="+32">🇧🇪 +32 (Belgique)</option>
+              <option value="+41">🇨🇭 +41 (Suisse)</option>
+              <option value="+34">🇪🇸 +34 (Espagne)</option>
+              <option value="+1">🇺🇸 +1 (USA/Canada)</option>
+              <!-- Autres indicatifs si nécessaire -->
+            </select>
+          </div>
+          <div style="width: 100%;">
+            <input type="tel" name="telephone" pattern="^0[1-9](\.[0-9]{2}){4}$" placeholder="06.00.01.02.03" required>
+          </div>
+        </div>
+
+        <label>Adresse postale <span style="color: #EFA8B4; font-weight: bold;">*</span></label>
+        <input type="text" name="adresse" placeholder="N° et nom de rue" required>
+        <div class="inline-fields">
+          <div><input type="text" name="code_postal" placeholder="Code postal" required></div>
+          <div><input type="text" name="ville" placeholder="Ville" required></div>
+          <div style="width: 100%;"><input type="text" name="pays" placeholder="Pays" required></div>
+        </div>
+      </div> <!-- END Informations personnelles -->
+
+      <div class="form-group">
+        <h3 style="margin-bottom: 0;">Participants</h3>
+
+        <div class="participants-section">
+          <div class="inline-fields">
+            <div style="margin-top:0;"> <!-- Nombre d'adultes -->
+              <label style="margin-top:0;">Nombre d'adulte(s) <span
+                  style="color: #EFA8B4; font-weight: bold;">*</span></label>
+              <div class="custom-select">
+                <select name="adultes" class="inline-medium" required>
+                  <option value="">-- Choisir --</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                </select>
+              </div>
+            </div>
+            <div style="margin-top:0;"> <!-- Nombre d'enfants -->
+              <label style="margin-top:0;">Y aura-t-il des enfants ?</label>
+              <div class="radio-group" style="accent-color: #8DB1A8;">
+                <label><input type="radio" id="enfants_oui" name="enfants_present" value="oui"
+                    onclick="toggleChildren(true)"> Oui, je viens avec des enfants</label>
+                <label><input type="radio" id="enfants_non" name="enfants_present" value="non"
+                    onclick="toggleChildren(false)"> Non, je ne viens pas avec des enfants</label>
+              </div>
+            </div>
+          </div>
+
+          <div id="children-section" style="display:none;">
+            <label>Informations sur les enfants</label>
+            <div id="children-entries">
+              <div class="child-entry">
+                <input type="text" name="prenom_enfant[]" placeholder="Prénom" disabled>
+                <div class="custom-select">
+                  <select name="age_enfant[]" class="age-select" disabled>
+                    <option value="">-- Âge --</option>
+                    <option value="0">0 ans</option>
+                    <option value="1">1 an</option>
+                    <option value="2">2 ans</option>
+                    <option value="3">3 ans</option>
+                    <option value="4">4 ans</option>
+                    <option value="5">5 ans</option>
+                    <option value="6">6 ans</option>
+                    <option value="7">7 ans</option>
+                    <option value="8">8 ans</option>
+                    <option value="9">9 ans</option>
+                    <option value="10">10 ans</option>
+                    <option value="11">11 ans</option>
+                    <option value="12">12 ans</option>
+                    <option value="13">13 ans</option>
+                    <option value="14">14 ans</option>
+                    <option value="15">15 ans</option>
+                    <option value="16">16 ans</option>
+                    <option value="17">17 ans</option>
+                    <option value="18">18 ans</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <button type="button" id="add-child-btn" onclick="addChild()">+ Ajouter un enfant</button>
+          </div>
+        </div>
+      </div>
+      <label>Besoin d’aide pour l’hébergement ?</label>
+      <div class="custom-select">
+        <select name="hebergement" required>
+          <option value="non">Non, c’est réglé !</option>
+          <option value="reco">Oui, des recommandations seraient top !</option>
+          <option value="coloc">On aimerait partager un logement avec d’autres invités</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <h3 style="margin-bottom: 0;">Régimes alimentaires et allergies</h3>
+        <div class="checkbox-group" checked style="accent-color: #8DB1A8;">
+          <input type="checkbox" name="regime[]" value="vegetarien"> Végétarien<br>
+          <input type="checkbox" name="regime[]" value="vegan"> Vegan<br>
+          <input type="checkbox" name="regime[]" value="gluten"> Sans gluten<br>
+        </div>
+        <textarea name="precisions_allergies" placeholder="Précisez vos allergies ici..."></textarea>
+      </div>
+      <div class="form-group">
+        <h3 style="margin-bottom: 0;">Vos suggestions</h3>
+        <label>Une chanson à suggérer ?</label>
+        <input type="text" name="chanson">
+
+        <label>Un détail magique à ajouter ?</label>
+        <input type="text" name="suggestion_magique">
+
+        <label>Un petit mot pour les mariés</label>
+        <textarea name="mot_maries" rows="4"></textarea>
+      </div>
+      <button class="button btn btn-pink" type="submit">ENVOYER MA RÉPONSE</button>
+    </form>
+  </div>
+  <footer>
+    <p>"Le bonheur n’est réel que lorsqu’il est partagé."</p>
+    <p style="font-family: 'RTL-Adam Script', serif; font-size: 2rem;">Charlotte & Julien</p>
+    <div style="margin-top: 20px;">
+      <a href="#" style="color: white; margin: 0 10px;"><i class="fas fa-envelope"></i></a>
+      <a href="#" style="color: white; margin: 0 10px;"><i class="fas fa-globe"></i></a>
+      <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,347 @@
+@charset "utf-8";
+/* CSS Document */
+/************************************************************************/
+/*                              fonts                                   */
+/************************************************************************/
+@import url('https://fonts.googleapis.com/css2?family=Georgia&display=swap');
+@import url('https://fonts.cdnfonts.com/css/gistesy');
+@import url('https://fonts.cdnfonts.com/css/forum');
+@import url("../fonts/rtl-adam-script/stylesheet-rtl-adamscript.css");
+@import url('https://fonts.cdnfonts.com/css/anaphora-trial');
+
+/************************************************************************/
+/*								form-accept.html						*/
+/************************************************************************/
+body {
+  margin: 0;
+  font-family: 'Forum', serif;
+  background-image: url('../images/form-accepted-bg-01.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #333;
+}
+
+.overlay {
+  background-color: rgba(255, 255, 255, 0.75);
+  /* Further increased transparency */
+  padding: 40px 20px;
+  max-width: 700px;
+  margin: 80px auto;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #EFA8B4;
+  font-family: 'RTL-Adam Script', serif;
+  font-size: 50px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 20px;
+  display: block;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: 'Forum', serif;
+  font-size: 1rem;
+  box-sizing: border-box;
+  appearance: none;
+  background-color: white;
+}
+
+input,
+textarea {
+  border: 1px solid #8DB1A8;
+  /* Ajoute une bordure harmonisée */
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  /* Supprime le contour par défaut */
+  border-color: #8DB1A8;
+  /* Bordure sur focus */
+  box-shadow: 0 0 5px #8DB1A8;
+  /* Effet lumineux */
+}
+
+select {
+  accent-color: #8DB1A8;
+  /* Change the selection color */
+  background-color: white;
+  /* Fond blanc pour le champ */
+  color: #333;
+  /* Couleur du texte */
+  border: 1px solid #8DB1A8;
+  /* Bordure personnalisée */
+}
+
+select option {
+  background-color: #FFF8F1;
+  /* Couleur de fond des options */
+  color: #333;
+  /* Couleur du texte des options */
+}
+
+select:focus {
+  outline: none;
+  /* Supprime le contour par défaut */
+  border-color: #8DB1A8;
+  /* Bordure sur focus */
+  box-shadow: 0 0 5px #8DB1A8;
+  /* Effet lumineux */
+}
+
+input.invalid,
+textarea.invalid {
+  border-color: #d9534f;
+  background-color: #ffecec;
+}
+
+.error-message {
+  color: #d9534f;
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-top: 5px;
+}
+
+.inline-fields {
+  display: flex;
+  gap: 20px;
+}
+
+.inline-medium {
+  width: 180px;
+}
+
+.checkbox-group,
+.radio-group {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+}
+
+.checkbox-group label,
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: normal;
+  margin: 0;
+}
+
+.checkbox-group input[type="checkbox"],
+.radio-group input[type="radio"] {
+  appearance: auto;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+}
+
+.participants-section {
+  margin-top: 0px; /*20px;*/
+}
+
+.child-entry {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.child-entry select,
+.child-entry input {
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.child-entry select.age-select {
+  width: 90px;
+}
+
+.child-entry button {
+  background-color: transparent;
+  border: 2px solid #EFA8B4;
+  font-size: 1.2rem;
+  color: #EFA8B4;
+  cursor: pointer;
+  font-family: 'anaphora-trial';
+}
+
+.child-entry button:hover {
+  color: white;
+  background-color: #EFA8B4;
+}
+
+button[type="submit"] {
+  margin-top: 30px;
+  color: #EFA8B4;
+  background-color: rgba(255, 255, 255, 0.5);
+  /* Added transparency */
+  padding: 12px 25px;
+  font-size: 1rem;
+  border: 2px solid #EFA8B4;
+  border-radius: 0px;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: 'anaphora-trial';
+  font-size: 1.2rem;
+}
+
+button[type="submit"]:hover {
+  color: white;
+  background-color: #EFA8B4;
+  font-family: 'anaphora-trial';
+}
+
+#add-child-btn {
+  margin-top: 10px;
+  border: 2px solid #8DB1A8;
+  color: #8DB1A8;
+  background-color: rgba(255, 255, 255, 0.5);
+  /* Added transparency */
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: 'anaphora-trial';
+}
+
+#add-child-btn:hover {
+  color: white;
+  background-color: #8DB1A8;
+  font-family: 'anaphora-trial';
+}
+
+.custom-select {
+  position: relative;
+  display: inline-block;
+  padding-top: 0.5rem;
+  width: 100%;
+}
+
+.custom-select select {
+  display: none;
+  /* Masque le select natif */
+}
+
+.select-selected {
+  background-color: white;
+  color: #333;
+  border: 1px solid #8DB1A8;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.select-selected.select-arrow-active {
+  border-radius: 8px 8px 0 0;
+}
+
+.select-items {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #8DB1A8;
+  border-radius: 0 0 8px 8px;
+  z-index: 99;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  display: none;
+  box-sizing: border-box;
+}
+
+.select-items div {
+  padding: 10px;
+  cursor: pointer;
+  color: #333;
+}
+
+.select-items div:hover {
+  background-color: #8DB1A8;
+  color: white;
+}
+
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #8DB1A8 transparent;
+}
+
+@media (max-width: 768px) {
+  .overlay {
+    padding: 20px 10px;
+    margin: 40px auto;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .inline-fields {
+    flex-direction: column;
+    flex: 1;
+    gap: 10px;
+  }
+
+  .inline-medium {
+    width: 100%;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 0.9rem;
+  }
+
+  button[type="submit"],
+  #add-child-btn {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .child-entry {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .child-entry select.age-select {
+    width: 100%;
+  }
+}
+
+#form-feedback {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.feedback-error {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+.feedback-success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}

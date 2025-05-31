@@ -1,0 +1,65 @@
+@font-face {
+    font-family: 'RTL-Adam Script';
+    src: url('RTL-AdamScript-Regular.eot');
+    src: local('RTL-Adam Script Regular'), local('RTL-AdamScript-Regular'),
+        url('RTL-AdamScript-Regular.eot?#iefix') format('embedded-opentype'),
+        url('RTL-AdamScript-Regular.woff2') format('woff2'),
+        url('RTL-AdamScript-Regular.woff') format('woff'),
+        url('RTL-AdamScript-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'RTL-Adam Script';
+    src: url('RTL-AdamScript-Light.eot');
+    src: local('RTL-Adam Script Light'), local('RTL-AdamScript-Light'),
+        url('RTL-AdamScript-Light.eot?#iefix') format('embedded-opentype'),
+        url('RTL-AdamScript-Light.woff2') format('woff2'),
+        url('RTL-AdamScript-Light.woff') format('woff'),
+        url('RTL-AdamScript-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'RTL-Adam Script';
+    src: url('RTL-AdamScript-Heavy.eot');
+    src: local('RTL-Adam Script Heavy'), local('RTL-AdamScript-Heavy'),
+        url('RTL-AdamScript-Heavy.eot?#iefix') format('embedded-opentype'),
+        url('RTL-AdamScript-Heavy.woff2') format('woff2'),
+        url('RTL-AdamScript-Heavy.woff') format('woff'),
+        url('RTL-AdamScript-Heavy.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'RTL-Adam Script';
+    src: url('RTL-AdamScript-Bold.eot');
+    src: local('RTL-Adam Script Bold'), local('RTL-AdamScript-Bold'),
+        url('RTL-AdamScript-Bold.eot?#iefix') format('embedded-opentype'),
+        url('RTL-AdamScript-Bold.woff2') format('woff2'),
+        url('RTL-AdamScript-Bold.woff') format('woff'),
+        url('RTL-AdamScript-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'RTL-Adam Script';
+    src: url('RTL-AdamScript-Thin.eot');
+    src: local('RTL-Adam Script Thin'), local('RTL-AdamScript-Thin'),
+        url('RTL-AdamScript-Thin.eot?#iefix') format('embedded-opentype'),
+        url('RTL-AdamScript-Thin.woff2') format('woff2'),
+        url('RTL-AdamScript-Thin.woff') format('woff'),
+        url('RTL-AdamScript-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
