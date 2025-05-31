@@ -1,3 +1,4 @@
+/* Responsive wedding RSVP site CSS with improved mobile layout */
 @charset "utf-8";
 /* CSS Document */
 /************************************************************************/
@@ -19,12 +20,12 @@
 /* Prevent overrun */
 * {
     box-sizing: border-box;
-  }
+}
 
 body {
     margin: 0;
-    margin-bottom: 0;
     padding: 0;
+    overflow-x: hidden;
     line-height: 1.6;
     color: #333;
     font-family: 'Anaphora-Trial', Verdana, Arial, Helvetica, sans-serif;
@@ -33,112 +34,96 @@ body {
 }
 
 .wrapper {
-    position: relative;
-    float: left;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 0px;
-    padding: 0px;
-    width: 100%;
-    height: 100%;
     max-width: 100%;
-    overflow-x: hidden;
 }
 
-/* Transition */
 .fade-in {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  }
-  
-  .fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
-
-/* Home Section */
-.homesection {
-    position: relative;
-    float: left;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10%;
-    background-color: #FFF8F1;
 }
 
-.image-box {
-    padding: 0;
-    /* pour éviter que le padding n'affecte la taille de l'image */
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hero Section */
+.hero {
+    background-color: #FFF8F1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px 20px;
+}
+
+.home-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+}
+
+.home-box {
+    flex: 1 1 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 0 10px;
 }
 
 .image-box img {
     width: 100%;
     height: auto;
     object-fit: cover;
-    /* remplissage sans déformation */
     display: block;
     border-radius: 10px;
-}
-
-.hero {
-    background-color: #FFF8F1;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 0 20px;
-    padding-top: 40px;
-}
-
-.home-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    /* Reduced gap from 20px to 10px */
-    padding: 20px;
-}
-
-.home-box {
-    flex: 1 1 45%;
-    box-sizing: border-box;
-}
-
-.home-box h2 {
-    font-size: clamp(1rem, 3vw, 3rem);
-    /* Adjust font size for h2 */
+    max-width: 100%;
 }
 
 h1 {
     font-family: 'RTL-Adam Script', serif;
-    font-size: 8rem;
+    font-size: clamp(2rem, 8vw, 8rem);
     color: #8DB1A8;
-    margin: 0px;
-    font-weight: unset;
-    /* margin-bottom: 10px; */
+    margin: 0;
+    font-weight: normal;
+    word-break: break-word;
+    margin-top: -4%;
+    margin-bottom: -4%;
+}
+
+.intermediaire {
+    font-family: 'RTL-Adam Script', serif;
+    font-size: clamp(1.5rem, 6vw, 3rem);
+    color: #8DB1A8;
+    margin: 0;
+    font-weight: normal;
+    word-break: break-word;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+h2,
+h3 {
+    font-family: 'Anaphora Trial', serif;
+    color: #EFA8B4;
+    font-weight: 400;
+    word-break: break-word;
 }
 
 h2 {
-    font-family: 'Anaphora Trial', serif;
-    font-size: 3rem;
-    color: #EFA8B4;
-    margin-top: 50px;
-    font-weight: 400;
+    font-size: clamp(1rem, 4vw, 2rem);
+    margin: 5% 0% 2%;
 }
 
 h3 {
-    font-family: 'Anaphora Trial', serif;
     font-size: 1.5rem;
-    font-weight: bold;
-    color: #8DB1A8;
-    font-weight: 400;
 }
 
 .date {
@@ -150,20 +135,14 @@ h3 {
 
 .btn {
     display: inline-block;
-    color: #EB964D;
     padding: 15px 30px;
     margin: 10px;
-    border-radius: 0px;
+    border-radius: 0;
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.3s ease;
-    border: 2px solid #EB964D;
     font-size: 20px;
-}
-
-.btn:hover {
-    background: #EB964D;
-    color: white;
+    transition: all 0.3s ease;
+    max-width: 100%;
 }
 
 .btn-orange {
@@ -196,13 +175,6 @@ h3 {
     color: white;
 }
 
-.button-container {
-    display: flex;
-    gap: 20px;
-    /* Increased spacing between buttons */
-    justify-content: center;
-}
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -213,9 +185,8 @@ h3 {
     font-family: 'RTL-Adam Script', serif;
     font-size: 3rem;
     text-align: center;
-    margin-top: 0;
-    margin-bottom: 40px;
     color: #EFA8B4;
+    word-break: break-word;
 }
 
 .details {
@@ -243,40 +214,17 @@ h3 {
 }
 
 footer {
-    background-color: #EFA8B4;
     background-image: url('ressources/images/footer-photo-01.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     width: 100%;
-    height: auto;
     color: white;
     text-align: center;
     padding: 30px 0;
     margin-top: 60px;
     font-family: 'Anaphora-Trial', sans-serif;
     font-size: 1rem;
-}
-
-select {
-    accent-color: #8DB1A8;
-    /* Change the selection color */
-}
-
-input,
-textarea {
-    border: 1px solid #8DB1A8;
-    /* Ajoute une bordure harmonisée */
-}
-
-input:focus,
-textarea:focus {
-    outline: none;
-    /* Supprime le contour par défaut */
-    border-color: #8DB1A8;
-    /* Bordure sur focus */
-    box-shadow: 0 0 5px #8DB1A8;
-    /* Effet lumineux */
 }
 
 .modal {
@@ -303,11 +251,8 @@ textarea:focus {
 
 .modal-content input {
     width: calc(100% - 40px);
-    /* Ensure equal spacing on both sides */
     margin: 10px 20px;
-    /* Add margin to match the spacing */
     padding: 10px;
-    margin: 10px 0;
     border: 1px solid #8DB1A8;
     border-radius: 5px;
     font-size: 1rem;
@@ -332,74 +277,49 @@ textarea:focus {
     color: white;
 }
 
-/* breakpoint intermédiaire tablette (768px à 1024px) */
+.menu-toggle {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    z-index: 1001;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 15px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+@media (max-width: 1600px) {
+    .home-box {
+        flex: 1 1 100%;
+        text-align: center;
+        max-width: 700px;
+    }
+}
+
 @media (max-width: 1024px) {
     .home-box {
         flex: 1 1 100%;
         text-align: center;
-    }
-
-    .details {
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 768px) {
-    .home-container {
-        flex-direction: column-reverse;
-    }
-}
-
-
-@media (max-width: 568px) {
-    h1 {
-        font-size: 2.5rem;
-    }
-
-    h2 {
-        font-size: 1.5rem;
-    }
-
-    .date {
-        font-size: 1.2rem;
-    }
-
-    .home-container {
-        flex-direction: column;
-        /* Stack blocks vertically */
-        align-items: center;
-        /* Center align the blocks */
-        gap: 20px;
-        /* Add spacing between blocks */
-    }
-
-    .home-box {
-        flex: 1;
-        width: 100%;
-        /* Make blocks take full width */
-        text-align: center;
-        /* Center align text */
-    }
-
-    .image-box img {
-        max-width: 100%;
-        height: auto;
-    }
-
-    .home-box h1,
-    .home-box h2 {
-        font-size: clamp(1.2rem, 4vw, 2.5rem);
-        /* Adjust font size for smaller screens */
-    }
-
-    .home-box h2 {
-        font-size: clamp(0.8rem, 2.5vw, 1.5rem);
-        /* Adjust font size for h2 on smaller screens */
-    }
-
-    .btn {
-        width: 100%;
-        text-align: center;
+        max-width: 500px;
     }
 
     .details {
@@ -411,12 +331,72 @@ textarea:focus {
         width: 90%;
     }
 
-    footer {
-        font-size: 0.8rem;
+    h1 {
+        font-size: clamp(1.5rem, 7vw, 6rem);
+        margin: 0;
+        margin-top: -4%;
+        margin-bottom: -4%;
+    }
+
+    .intermediaire {
+        font-family: 'RTL-Adam Script', serif;
+        font-size: clamp(1.5rem, 6vw, 2rem);
+        color: #8DB1A8;
+        margin: 0;
+        font-weight: normal;
+        word-break: break-word;
+        margin-top: 0;
+        margin-bottom: 0;
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 568px) {
+    h1 {
+        font-size: clamp(1rem, 7vw, 8rem);
+        margin: 0;
+        margin-top: -4%;
+        margin-bottom: -4%;
+    }
+
+    .intermediaire {
+        font-family: 'RTL-Adam Script', serif;
+        font-size: clamp(1.5rem, 6vw, 1rem);
+        color: #8DB1A8;
+        margin: 0;
+        font-weight: normal;
+        word-break: break-word;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    h2 {
+        font-size: clamp(1rem, 5vw, 1.8rem);
+    }
+
+    .date {
+        font-size: 1.2rem;
+    }
+
+    .home-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px 10px;
+    }
+
+    .home-box,
+    .image-box {
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    footer {
+        font-size: 0.8rem;
+    }
+
     .modal-content {
         width: 90%;
     }
