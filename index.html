@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#FFF8F1">
     <title>Charlotte & Julien - Mariage</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="./ressources/css/style.css"> <!-- Fixed path -->
@@ -12,30 +14,30 @@
 
 <body>
     <div class="wrapper">
-        <!-- START Navigation Menu --
+        <!-- START Navigation Menu -->
         <nav
             style="background-color: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); position: fixed; top: 0; width: 100%; z-index: 999; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
             <ul
                 style="display: flex; justify-content: center; list-style: none; margin: 0; padding: 15px 0; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.95rem;">
                 <li style="margin: 0 20px;"><a href="#accueil" style="text-decoration: none; color: #333;">Le Grand
                         Départ</a></li>
-                <li style="margin: 0 20px;"><a href="#histoire" style="text-decoration: none; color: #333;">Itinéraire
+                <!-- <li style="margin: 0 20px;"><a href="#histoire" style="text-decoration: none; color: #333;">Itinéraire
                         d’un
-                        coup de foudre</a></li>
+                        coup de foudre</a></li> -->
                 <li style="margin: 0 20px;"><a href="#infos" style="text-decoration: none; color: #333;">Notre Grand
                         Jour</a></li>
-                <li style="margin: 0 20px;"><a href="#programme" style="text-decoration: none; color: #333;">Les escales
-                        festives</a></li>
+                <!-- <li style="margin: 0 20px;"><a href="#programme" style="text-decoration: none; color: #333;">Les escales
+                        festives</a></li> -->
                 <li style="margin: 0 20px;"><a href="#rsvp" style="text-decoration: none; color: #333;">Embarquement
                         immédiat</a></li>
             </ul>
-        </nav> --><!-- END Navigation Menu -->
+        </nav> <!-- END Navigation Menu -->
 
         <!-- START Home Section -->
         <section id="accueil" class="hero">
             <div class="home-container">
                 <div class="home-box image-box">
-                    <img src="ressources/images/home-photo-03.png" alt="Charlotte & Julien">
+                    <img src="./ressources/images/home-photo-03.png" alt="Charlotte & Julien">
                 </div>
                 <div class="home-box">
                     <h1 style="margin-bottom: -40px; font-size: clamp(2rem, 8vw, 8rem);">Charlotte</h1>
@@ -54,7 +56,7 @@
             </div>
         </section> <!-- END Home Section -->
 
-        <section id="infos" style="background-color: #FDEEE4;"> <!-- class="hero">-->
+        <section id="infos" style="background-color: #FDEEE4;" class="fade-in"> <!-- class="hero">-->
             <div class="container" id="infos">
                 <h2 class="section-title">Notre Grand Jour</h2>
                 <div class="details">
@@ -83,7 +85,7 @@
                 </div>
             </div>
         </section>
-<!--
+        <!--
         <div class="container" id="histoire">
             <h2 class="section-title">Itinéraire d’un coup de foudre</h2>
             <p>Il était une fois, un été ensoleillé à Majorque...</p>
@@ -92,15 +94,18 @@
             <p>Après plusieurs années de complicité, de rires et d'aventures, ils ont décidé de s'unir pour la vie.</p>
             <p>Rejoignez-les pour une journée inoubliable, remplie d'amour, de rires et de souvenirs.</p>
         </div> -->
-        <div class="container" id="rsvp">
-            <h2 class="section-title" style="color: #8DB1A8; font-family: 'anaphora-trial';">Nous serions heureux de vous compter parmi nous !</h2>
+        <div class="container fade-in" id="rsvp">
+            <h2 class="section-title" style="color: #8DB1A8; font-family: 'anaphora-trial';">Nous serions heureux de
+                vous compter parmi nous !</h2>
             <h1 class="section-title" style="margin-bottom: 0px; font-size: 5rem;">Le 27 Juin 2026</h1>
             <h1 class="section-title" style="margin-top: 0px; font-size: 2rem;">à Palma De Majorque, Îles Baléares</h1>
             <div style="text-align: center; max-width: 800px; margin: 0 auto;">
-                <a href="#" class="btn btn-pink" style="margin-top: 30px;" onclick="openCaptchaModal('form/form-accept.html')">J'ACCEPTE AVEC PLAISIR</a>
-                <a href="#" class="btn btn-green" style="margin-top: 30px;" onclick="openCaptchaModal('form/form-declined.html')">JE DÉCLINE AVEC REGRET</a>
-                <p>Nous attendons votre réponse <u>AU PLUS TARD</u> le 20 janvier 2026 
-                </br>en remplissant notre formulaire en ligne.</p>
+                <a href="#" class="btn btn-pink" style="margin-top: 30px;"
+                    onclick="openCaptchaModal('form/form-accept.html')">J'ACCEPTE AVEC PLAISIR</a>
+                <a href="#" class="btn btn-green" style="margin-top: 30px;"
+                    onclick="openCaptchaModal('form/form-declined.html')">JE DÉCLINE AVEC REGRET</a>
+                <p>Nous attendons votre réponse <u>AU PLUS TARD</u> le 20 janvier 2026
+                    </br>en remplissant notre formulaire en ligne.</p>
             </div>
         </div>
 
@@ -125,11 +130,13 @@
                 <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-instagram"></i></a>
             </div>
             <div style="margin-top: 20px;">
-                <a href="http://localhost:8000/admin.php" style="color: white; text-decoration: none; font-size: 1rem;">Accès Admin</a>
+                <a href="./admin/admin.php" style="color: white; text-decoration: none; font-size: 1rem;">Accès
+                    Admin</a>
             </div>
         </footer>
     </div>
     <script src="script/captcha.js"></script>
+    <script src="script/script-transition-fadein.js"></script>
 </body>
 
 </html>
