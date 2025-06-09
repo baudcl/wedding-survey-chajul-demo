@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP - Mariage à Palma</title>
+    <link rel="stylesheet" href="../ressources/css/style.css">
+    <link rel="stylesheet" href="../ressources/css/style-form-declined.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="../script/script-form-declind.js"></script>
+    <!-- Protéger le formulaire contre le spam -->
+    <input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off">
+    <input type="hidden" name="timestamp" id="timestamp"> <!-- Détection de rapidité de soumission -->
+</head>
+
+<body>
+    <div class="overlay">
+        <h1>Nous comprenons et vous remercions de nous avoir prévenus</h1>
+        <p class="subtitle">Votre présence nous manquera, mais nous apprécions que vous ayez pris le temps de nous
+            répondre.</p>
+
+        <form id="weddingDeclineForm" action="http://localhost:8000/server/handle-form-declined.php" method="POST"
+            onsubmit="return confirmSubmission(event)">
+            <input type="hidden" name="presence" value="non">
+
+            <!-- START : Informations personnelles -->
+            <div class="form-group">
+                <h3 style="margin-bottom: 0;">Vos informations</h3>
+                <div class="inline-fields">
+                    <div style="width: 100%;">
+                        <label>Prénom <span style="color: #8DB1A8; font-weight: bold;">*</span></label>
+                        <input type="text" name="prenom" required>
+                    </div>
+                    <div style="width: 100%;">
+                        <label>Nom <span style="color: #8DB1A8; font-weight: bold;">*</span></label>
+                        <input type="text" name="nom" required>
+                    </div>
+                </div>
+
+                <label>Adresse e-mail <span style="color: #8DB1A8; font-weight: bold;">*</span></label>
+                <input type="email" name="email" required>
+
+                <label>Numéro de téléphone</label>
+                <div class="inline-fields">
+                    <div class="custom-select">
+                        <select name="indicatif" class="inline-medium">
+                            <option value="+33">🇫🇷 +33 (France)</option>
+                            <option value="+34">🇪🇸 +34 (Espagne)</option>
+                            <option value="+1">🇺🇸 +1 (USA/Canada)</option>
+                        </select>
+                    </div>
+                    <div style="width: 100%;">
+                        <input type="tel" name="telephone" pattern="^0[1-9](\.[0-9]{2}){4}$"
+                            placeholder="06.00.01.02.03">
+                    </div>
+                </div>
+            </div> <!-- END Informations personnelles -->
+
+            <!-- START : Motif (optionnel) -->
+            <div class="form-group">
+                <h3 style="margin-bottom: 0;">Motif de votre absence (optionnel)</h3>
+                <p class="form-note">Cette information nous aide à mieux comprendre et n'est pas obligatoire.</p>
+
+                <div class="radio-group">
+                    <label><input type="radio" name="motif" value="conflit_agenda"> Conflit d'agenda</label>
+                    <label><input type="radio" name="motif" value="distance_voyage"> Distance/Voyage trop
+                        compliqué</label>
+                    <label><input type="radio" name="motif" value="raisons_personnelles"> Raisons personnelles</label>
+                    <label><input type="radio" name="motif" value="sante"> Raisons de santé</label>
+                    <label><input type="radio" name="motif" value="non_precise"> Je préfère ne pas préciser</label>
+                </div>
+
+                <div id="motif-autre-section" style="display: none; margin-top: 15px;">
+                    <label>Précisez votre motif :</label>
+                    <textarea name="motif_autre" rows="3" placeholder="Merci de préciser..."></textarea>
+                </div>
+            </div> <!-- END Motif -->
+
+            <!-- START : Nombre de personnes concernées -->
+            <div class="form-group">
+                <h3 style="margin-bottom: 0;">Nombre de personnes concernées</h3>
+                <p class="form-note">Combien de personnes ne pourront pas venir ? (vous inclus)</p>
+
+                <div class="inline-fields">
+                    <div style="margin-top:0;">
+                        <label style="margin-top:0;">Nombre d'adulte(s) <span
+                                style="color: #8DB1A8; font-weight: bold;">*</span></label>
+                        <div class="custom-select">
+                            <select name="adultes_absents" class="inline-medium" required>
+                                <option value="">-- Choisir --</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="margin-top:0;">
+                        <label style="margin-top:0;">Des enfants étaient-ils prévus ?</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="enfants_absents" value="oui"
+                                    onclick="toggleChildrenAbsent(true)"> Oui</label>
+                            <label><input type="radio" name="enfants_absents" value="non"
+                                    onclick="toggleChildrenAbsent(false)" checked> Non</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="children-absent-section" style="display:none; margin-top: 15px;">
+                    <label>Nombre d'enfants qui ne viendront pas :</label>
+                    <div class="custom-select">
+                        <select name="nombre_enfants_absents" class="inline-medium">
+                            <option value="">-- Choisir --</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+            </div> <!-- END Nombre de personnes -->
+
+            <!-- START : Participation alternative -->
+            <div class="form-group">
+                <h3 style="margin-bottom: 0;">Souhaitez-vous participer autrement ?</h3>
+                <p class="form-note">Même si vous ne pouvez pas être présents, nous serions ravis de vous inclure d'une
+                    autre manière.</p>
+
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="participation[]" value="video_message"> Envoyer un message
+                        vidéo</label>
+                    <label><input type="checkbox" name="participation[]" value="photo_souvenir"> Recevoir des photos du
+                        mariage</label>
+                    <label><input type="checkbox" name="participation[]" value="cadeau"> Participer à la liste de
+                        mariage</label>
+                    <label><input type="checkbox" name="participation[]" value="rien"> Non merci, ce n'est pas
+                        nécessaire</label>
+                </div>
+
+                <div id="video-details" style="display: none; margin-top: 15px;">
+                    <label>Email où vous envoyer les détails pour le message vidéo :</label>
+                    <input type="email" name="email_video" placeholder="Votre email (si différent)">
+                </div>
+
+                <div id="celebration-details" style="display: none; margin-top: 15px;">
+                    <label>Vos disponibilités pour une future célébration :</label>
+                    <textarea name="disponibilites" rows="2"
+                        placeholder="Ex: Week-ends de juillet, vacances d'été..."></textarea>
+                </div>
+
+                <!-- Suggestions malgré l'absence -->
+                <div style="margin-top: 25px;">
+                    <h4 style="color: #8DB1A8; margin-bottom: 15px;">Vos suggestions pour le grand jour</h4>
+                    <p class="form-note">Même absent(e), vous pouvez contribuer à rendre cette journée magique !</p>
+
+                    <label>Une chanson à suggérer ?</label>
+                    <input type="text" name="chanson" placeholder="Titre et artiste...">
+
+                    <label>Un détail magique à ajouter ?</label>
+                    <input type="text" name="suggestion_magique"
+                        placeholder="Une idée pour rendre le mariage encore plus spécial...">
+
+                    <!-- START : Message personnel -->
+                    <label>Un petit mot pour les mariés</label>
+                    <p class="form-note">N'hésitez pas à nous laisser un petit message, cela nous ferait très plaisir !
+                    </p>
+                    <textarea name="mot_maries" rows="4"
+                        placeholder="Vos mots nous toucheront... Vous pouvez aussi nous souhaiter une belle journée !"></textarea>
+                    <!-- END Message personnel -->
+
+                </div>
+            </div> <!-- END Participation alternative -->
+
+            <button class="button btn btn-green" type="submit">ENVOYER MA RÉPONSE</button>
+        </form>
+
+        <div class="contact-info">
+            <p><i class="fas fa-heart"></i> Nous espérons vous voir lors d'une prochaine occasion !</p>
+            <p>Pour toute question : <a href="mailto:charlotteandjulien@gmail.com">charlotteandjulien@gmail.com</a></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>"Le bonheur n'est réel que lorsqu'il est partagé."</p>
+        <p style="font-family: 'RTL-Adam Script', serif; font-size: 2rem;">Charlotte & Julien</p>
+        <div style="margin-top: 20px;">
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fas fa-envelope"></i></a>
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fas fa-globe"></i></a>
+            <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+</body>
+
+</html>

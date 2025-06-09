@@ -120,7 +120,6 @@ try {
         'enfants_present' => $_POST['enfants_present'] ?? 'non',
         'enfants' => $enfants,
         'hebergement' => $_POST['hebergement'] ?? '',
-        'regimes' => isset($_POST['regime']) && is_array($_POST['regime']) ? implode(', ', $_POST['regime']) : '',
         'precisions_allergies' => $_POST['precisions_allergies'] ?? '',
         'chanson' => $_POST['chanson'] ?? '',
         'suggestion_magique' => $_POST['suggestion_magique'] ?? '',
@@ -151,7 +150,6 @@ try {
         enfants_present TEXT,
         enfants TEXT,
         hebergement TEXT,
-        regimes TEXT,
         precisions_allergies TEXT,
         chanson TEXT,
         suggestion_magique TEXT,
@@ -172,11 +170,11 @@ try {
     // Insérer les données
     $stmt = $db->prepare("INSERT INTO responses (
         submission_id, date, prenom, nom, email, telephone, adresse, code_postal, ville, pays, 
-        adultes, enfants_present, enfants, hebergement, regimes, precisions_allergies, 
+        adultes, enfants_present, enfants, hebergement, precisions_allergies, 
         chanson, suggestion_magique, mot_maries
     ) VALUES (
         :submission_id, :date, :prenom, :nom, :email, :telephone, :adresse, :code_postal, :ville, :pays,
-        :adultes, :enfants_present, :enfants, :hebergement, :regimes, :precisions_allergies,
+        :adultes, :enfants_present, :enfants, :hebergement, :precisions_allergies,
         :chanson, :suggestion_magique, :mot_maries
     )");
 
@@ -195,7 +193,6 @@ try {
         ':enfants_present' => $data['enfants_present'],
         ':enfants' => $enfants_json,
         ':hebergement' => $data['hebergement'],
-        ':regimes' => $data['regimes'],
         ':precisions_allergies' => $data['precisions_allergies'],
         ':chanson' => $data['chanson'],
         ':suggestion_magique' => $data['suggestion_magique'],
@@ -347,9 +344,6 @@ try {
             $mail->clearAddresses();
             $mail->addAddress($couple_email);
             $mail->Subject = "[RSVP] Nouvelle réponse - " . $data['prenom'] . " " . $data['nom'];
-            
-            $regimes_html = !empty($data['regimes']) ? htmlspecialchars($data['regimes']) : 'Aucun';
-            
             $mail->Body = "
                 <html>
                 <head>
@@ -406,10 +400,6 @@ try {
                             <tr>
                                 <th>Hébergement</th>
                                 <td>" . htmlspecialchars($data['hebergement']) . "</td>
-                            </tr>
-                            <tr>
-                                <th>Régimes alimentaires</th>
-                                <td>" . $regimes_html . "</td>
                             </tr>
                             <tr>
                                 <th>Précisions allergies</th>

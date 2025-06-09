@@ -99,7 +99,6 @@ try {
         enfants_present TEXT,
         enfants TEXT,
         hebergement TEXT,
-        regimes TEXT,
         precisions_allergies TEXT,
         chanson TEXT,
         suggestion_magique TEXT,
@@ -203,11 +202,11 @@ try {
             // Préparer l'insertion
             $stmt = $db->prepare("INSERT INTO responses (
                 submission_id, date, prenom, nom, email, telephone, adresse, code_postal, ville, pays, 
-                adultes, enfants_present, enfants, hebergement, regimes, precisions_allergies, 
+                adultes, enfants_present, enfants, hebergement, precisions_allergies, 
                 chanson, suggestion_magique, mot_maries
             ) VALUES (
                 :submission_id, :date, :prenom, :nom, :email, :telephone, :adresse, :code_postal, :ville, :pays,
-                :adultes, :enfants_present, :enfants, :hebergement, :regimes, :precisions_allergies,
+                :adultes, :enfants_present, :enfants, :hebergement, :precisions_allergies,
                 :chanson, :suggestion_magique, :mot_maries
             )");
             
@@ -226,7 +225,6 @@ try {
                 ':enfants_present' => $response['enfants_present'] ?? 'non',
                 ':enfants' => $enfants_json,
                 ':hebergement' => $response['hebergement'] ?? '',
-                ':regimes' => $response['regimes'] ?? '',
                 ':precisions_allergies' => $response['precisions_allergies'] ?? '',
                 ':chanson' => $response['chanson'] ?? '',
                 ':suggestion_magique' => $response['suggestion_magique'] ?? '',

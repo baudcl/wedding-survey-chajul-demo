@@ -60,22 +60,37 @@ body {
     padding: 60px 20px 20px;
 }
 
+
 .home-container {
-    display: flex;
+display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 40px; /* Augmenté pour plus d'espace entre image et texte */
     padding: 20px;
     width: 100%;
+    max-width: 1400px; /* Ajout d'une largeur max */
+    margin: 0 auto; /* Centrage du container */
 }
 
+
 .home-box {
-    flex: 1 1 100%;
-    max-width: 800px;
+    flex: 1 1 45%; /* 45% de largeur chacun sur desktop */
+    min-width: 300px; /* Largeur minimale */
     box-sizing: border-box;
     text-align: center;
-    padding: 0 10px;
+    padding: 0 20px;
+}
+
+/* Spécifier l'ordre pour que l'image soit à gauche */
+.home-box.image-box {
+    order: 1; /* Image à gauche */
+    flex: 1 1 45%;
+}
+
+.home-box:not(.image-box) {
+    order: 2; /* Texte à droite */
+    flex: 1 1 45%;
 }
 
 .image-box img {
@@ -218,6 +233,7 @@ footer {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-color: #EFA8B4;
     width: 100%;
     color: white;
     text-align: center;
@@ -316,10 +332,21 @@ nav ul li a {
 }
 
 @media (max-width: 1024px) {
+    .home-container {
+        gap: 30px;
+    }
+    
     .home-box {
-        flex: 1 1 100%;
-        text-align: center;
-        max-width: 500px;
+        flex: 1 1 100%; /* Empilage vertical sur tablet */
+        max-width: 600px;
+    }
+    
+    .home-box.image-box {
+        order: 1; /* Image en haut sur mobile */
+    }
+    
+    .home-box:not(.image-box) {
+        order: 2; /* Texte en bas sur mobile */
     }
 
     .details {
@@ -332,7 +359,7 @@ nav ul li a {
     }
 
     h1 {
-        font-size: clamp(1.5rem, 7vw, 6rem);
+        font-size: clamp(2rem, 8vw, 8rem);
         margin: 0;
         margin-top: -4%;
         margin-bottom: -4%;
@@ -348,11 +375,32 @@ nav ul li a {
         margin-top: 0;
         margin-bottom: 0;
     }
+
+    h2 {
+        font-size: clamp(1rem, 4vw, 2rem);
+        margin: 5% 0% 2%;
+    }
+}
+
+/* 5. Mobile : conserver l'empilage vertical */
+@media (max-width: 768px) {
+    .home-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px 10px;
+    }
+    
+    .home-box,
+    .image-box {
+        width: 100%;
+        flex: 1 1 100%;
+    }
 }
 
 @media (max-width: 568px) {
     h1 {
-        font-size: clamp(1rem, 7vw, 8rem);
+        font-size: clamp(2rem, 8vw, 8rem);
         margin: 0;
         margin-top: -4%;
         margin-bottom: -4%;
@@ -370,7 +418,8 @@ nav ul li a {
     }
 
     h2 {
-        font-size: clamp(1rem, 5vw, 1.8rem);
+        font-size: clamp(1rem, 4vw, 2rem);
+        margin: 5% 0% 2%;
     }
 
     .date {

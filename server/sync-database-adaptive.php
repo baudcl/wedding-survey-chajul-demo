@@ -124,7 +124,6 @@ try {
                 enfants_present TEXT,
                 enfants TEXT,
                 hebergement TEXT,
-                regimes TEXT,
                 precisions_allergies TEXT,
                 chanson TEXT,
                 suggestion_magique TEXT,
@@ -135,7 +134,7 @@ try {
             $columns = [
                 'id', 'submission_id', 'date', 'prenom', 'nom', 'email', 'telephone', 'adresse',
                 'code_postal', 'ville', 'pays', 'adultes', 'enfants_present', 'enfants',
-                'hebergement', 'regimes', 'precisions_allergies', 'chanson', 'suggestion_magique', 'mot_maries'
+                'hebergement', 'precisions_allergies', 'chanson', 'suggestion_magique', 'mot_maries'
             ];
             $has_submission_id = true;
         }
@@ -160,7 +159,6 @@ try {
             enfants_present TEXT,
             enfants TEXT,
             hebergement TEXT,
-            regimes TEXT,
             precisions_allergies TEXT,
             chanson TEXT,
             suggestion_magique TEXT,
@@ -171,7 +169,7 @@ try {
         $columns = [
             'id', 'submission_id', 'date', 'prenom', 'nom', 'email', 'telephone', 'adresse',
             'code_postal', 'ville', 'pays', 'adultes', 'enfants_present', 'enfants',
-            'hebergement', 'regimes', 'precisions_allergies', 'chanson', 'suggestion_magique', 'mot_maries'
+            'hebergement', 'precisions_allergies', 'chanson', 'suggestion_magique', 'mot_maries'
         ];
         $has_submission_id = true;
     }
@@ -252,7 +250,6 @@ try {
                     case 'ville':
                     case 'pays':
                     case 'hebergement':
-                    case 'regimes':
                     case 'precisions_allergies':
                     case 'chanson':
                     case 'suggestion_magique':

@@ -54,7 +54,6 @@ $repartition_hebergement = [
     'reco' => 0,
     'autre' => 0
 ];
-$regimes_count = [];
 
 // Liste des enfants avec leur famille
 $enfants_liste = [];
@@ -132,20 +131,6 @@ try {
                 $repartition_hebergement['autre']++;
             }
         }
-        
-        // Comptage des régimes alimentaires
-        if (isset($response['regimes']) && !empty($response['regimes'])) {
-            $regimes = explode(', ', $response['regimes']);
-            foreach ($regimes as $regime) {
-                $regime = trim($regime);
-                if (!empty($regime)) {
-                    if (!isset($regimes_count[$regime])) {
-                        $regimes_count[$regime] = 0;
-                    }
-                    $regimes_count[$regime]++;
-                }
-            }
-        }
     }
     
     // Trier la liste des enfants par âge
@@ -174,7 +159,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'csv') {
     fputcsv($output, [
         'Date', 'Prénom', 'Nom', 'Email', 'Téléphone', 'Adresse', 'Code Postal', 
         'Ville', 'Pays', "Nombre d'adultes", 'Enfants', 'Hébergement', 
-        'Régimes alimentaires', 'Précisions allergies'
+        'Précisions allergies'
     ], ',', '"', "\\", "\n");
     
     // Données
@@ -192,7 +177,6 @@ if (isset($_GET['export']) && $_GET['export'] === 'csv') {
             $response['adultes'],
             isset($response['enfants_formatted']) ? strip_tags($response['enfants_formatted']) : 'Aucun',
             $response['hebergement'],
-            $response['regimes'] ?: 'Aucun',
             $response['precisions_allergies'] ?: 'Aucune'
         ], ',', '"', "\\", "\n");
     }
@@ -547,11 +531,19 @@ if ($woff2_data || $woff_data || $ttf_data) {
             .search-box {
                 width: 100%;
             }
+            .export-button i {
+                font-size: 1.2rem;
+            }
+
+            .export-button:hover i {
+                transform: scale(1.1);
+                transition: transform 0.2s;
+            }
         }
     </style>
-    <link rel="stylesheet" href="/wedding-survey-chajul/ressources/css/style.css">
-    <link rel="stylesheet" href="/wedding-survey-chajul/ressources/fonts/rtl-adam-script/stylesheet-rtl-adamscript.css">
-    
+    <link rel="stylesheet" href="../ressources/css/style.css">
+    <link rel="stylesheet" href="../ressources/fonts/rtl-adam-script/stylesheet-rtl-adamscript.css">   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 </head>
 <body>
     <header>
@@ -567,7 +559,23 @@ if ($woff2_data || $woff_data || $ttf_data) {
             <a href="?logout=1" class="logout-button">Déconnexion</a>
         </div>
         
-        <h2>Tableau de bord</h2>
+        <!-- Ajouter après la section des statistiques du tableau de bord (après la div.dashboard) : -->
+
+        <div style="margin: 30px 0;">
+            <h2 style="margin-bottom: 20px;">Gestion du mariage</h2>
+            <div style="display: flex; justify-content: left; gap: 20px; flex-wrap: wrap;">
+                <a href="admin-manage-guests.php" class="export-button" style="min-width: 200px;">
+                    <i class="fas fa-users" style="margin-right: 10px;"></i>
+                    Gérer la liste des invités
+                </a>
+                <a href="admin-table-map.php" class="export-button" style="min-width: 200px; background-color: #EFA8B4;">
+                    <i class="fas fa-chair" style="margin-right: 10px;"></i>
+                    Créer le plan de table
+                </a>
+            </div>
+        </div>
+
+        <h2>Tableau de bord des réponses</h2>
         
         <div class="dashboard">
             <div class="card">
@@ -602,25 +610,15 @@ if ($woff2_data || $woff_data || $ttf_data) {
                 <p><strong>Recommandations souhaitées :</strong> <?= $repartition_hebergement['reco'] ?></p>
                 <p><strong>Autres :</strong> <?= $repartition_hebergement['autre'] ?></p>
             </div>
-            
-            <div class="card">
-                <h3>Régimes alimentaires</h3>
-                <?php foreach ($regimes_count as $regime => $count): ?>
-                <p><strong><?= htmlspecialchars($regime) ?>:</strong> <?= $count ?></p>
-                <?php endforeach; ?>
-                <?php if (empty($regimes_count)): ?>
-                <p>Aucun régime spécifique signalé</p>
-                <?php endif; ?>
-            </div>
         </div>
         
         <div class="tabs">
-    <div id="tab-reponses" class="tab active" onclick="showTab('reponses')">Toutes les réponses</div>
-    <div id="tab-enfants" class="tab" onclick="showTab('enfants')">Liste des enfants</div>
-    <div id="tab-chansons" class="tab" onclick="showTab('chansons')">Chansons</div>
-    <div id="tab-details-magiques" class="tab" onclick="showTab('details-magiques')">Détails magiques</div>
-    <div id="tab-messages" class="tab" onclick="showTab('messages')">Messages aux mariés</div>
-</div>
+            <div id="tab-reponses" class="tab active" onclick="showTab('reponses')">Toutes les réponses</div>
+            <div id="tab-enfants" class="tab" onclick="showTab('enfants')">Liste des enfants</div>
+            <div id="tab-chansons" class="tab" onclick="showTab('chansons')">Chansons</div>
+            <div id="tab-details-magiques" class="tab" onclick="showTab('details-magiques')">Détails magiques</div>
+            <div id="tab-messages" class="tab" onclick="showTab('messages')">Messages aux mariés</div>
+        </div>
         
         <div id="reponses" class="tab-content active">
             <h2>Liste des réponses</h2>
@@ -648,7 +646,6 @@ if ($woff2_data || $woff_data || $ttf_data) {
                                 <th>Enfants</th>
                                 <th style="background-color: #EFA8B4; color: white;">Total</th>
                                 <th>Hébergement</th>
-                                <th>Régimes</th>
                                 <th>Allergies</th>
                             </tr>
                         </thead>
@@ -657,13 +654,24 @@ if ($woff2_data || $woff_data || $ttf_data) {
                                 <tr>
                                     <td><?= htmlspecialchars($response['date']) ?></td>
                                     <td><?= htmlspecialchars($response['prenom'] . ' ' . $response['nom']) ?></td>
-                                    <td><?= htmlspecialchars($response['email']) ?></td>
+                                    <td><?= htmlspecialchars($response['email']) ?>
+                                        <?php
+                                            // Vérifier si cet invité est dans la liste des invités
+                                            $stmt_check = $db->prepare("SELECT statut FROM invites WHERE email = ?");
+                                            $stmt_check->execute([$response['email']]);
+                                            $invite_info = $stmt_check->fetch();
+
+                                            if ($invite_info): ?>
+                                                <br><span class="status-badge confirme">Dans la liste</span>
+                                            <?php else: ?>
+                                                <br><span class="status-badge en_attente">À ajouter</span>
+                                        <?php endif; ?>
+                                    </td>
                                     <td><?= htmlspecialchars($response['telephone']) ?></td>
                                     <td><?= htmlspecialchars($response['adultes']) ?></td>
                                     <td><?= $response['enfants_formatted'] ?></td>
                                     <td style="background-color: rgba(239, 168, 180, 0.2); font-weight: bold; color: #EFA8B4; text-align: center"><?= $response['total_invites'] ?></td>
                                     <td><?= htmlspecialchars($response['hebergement']) ?></td>
-                                    <td><?= htmlspecialchars($response['regimes'] ?: 'Aucun') ?></td>
                                     <td><?= htmlspecialchars($response['precisions_allergies'] ?: 'Aucune') ?></td>
                                 </tr>
                             <?php endforeach; ?>
@@ -706,48 +714,48 @@ if ($woff2_data || $woff_data || $ttf_data) {
             <?php endif; ?>
         </div>
         <!-- Nouveau contenu pour l'onglet "Chansons" -->
-<div id="chansons" class="tab-content">
-    <h2>Liste des chansons suggérées</h2>
+        <div id="chansons" class="tab-content">
+            <h2>Liste des chansons suggérées</h2>
     
-    <?php 
-    // Filtrer les réponses pour ne garder que celles avec des chansons
-    $chansons_liste = [];
-    foreach ($responses as $response) {
-        if (!empty($response['chanson'])) {
-            $chansons_liste[] = [
-                'chanson' => $response['chanson'],
-                'invite' => $response['prenom'] . ' ' . $response['nom'],
-                'email' => $response['email']
-            ];
-        }
-    }
-    ?>
+            <?php 
+            // Filtrer les réponses pour ne garder que celles avec des chansons
+            $chansons_liste = [];
+            foreach ($responses as $response) {
+                if (!empty($response['chanson'])) {
+                    $chansons_liste[] = [
+                        'chanson' => $response['chanson'],
+                        'invite' => $response['prenom'] . ' ' . $response['nom'],
+                        'email' => $response['email']
+                    ];
+                }
+            }
+            ?>
     
-    <?php if (empty($chansons_liste)): ?>
-        <p style="text-align: center; font-size: 1.2rem; color: #333;">
-            Aucune chanson n'a été suggérée.
-        </p>
-    <?php else: ?>
-        <div class="table-container">
-            <table id="chansonsTable">
-                <thead>
-                    <tr>
-                        <th>Chanson</th>
-                        <th>Suggérée par</th>
-                        <th>Email de contact</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($chansons_liste as $item): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($item['chanson']) ?></td>
-                            <td><?= htmlspecialchars($item['invite']) ?></td>
-                            <td><?= htmlspecialchars($item['email']) ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
+            <?php if (empty($chansons_liste)): ?>
+                <p style="text-align: center; font-size: 1.2rem; color: #333;">
+                    Aucune chanson n'a été suggérée.
+                </p>
+            <?php else: ?>
+                <div class="table-container">
+                    <table id="chansonsTable">
+                        <thead>
+                            <tr>
+                                <th>Chanson</th>
+                                <th>Suggérée par</th>
+                                <th>Email de contact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($chansons_liste as $item): ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($item['chanson']) ?></td>
+                                    <td><?= htmlspecialchars($item['invite']) ?></td>
+                                    <td><?= htmlspecialchars($item['email']) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
         <div style="margin-top: 20px;">
             <a href="?export_chansons=csv" class="export-button">Exporter la liste des chansons</a>
         </div>

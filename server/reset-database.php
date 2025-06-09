@@ -96,7 +96,6 @@ try {
         enfants_present TEXT,
         enfants TEXT,
         hebergement TEXT,
-        regimes TEXT,
         precisions_allergies TEXT,
         chanson TEXT,
         suggestion_magique TEXT,

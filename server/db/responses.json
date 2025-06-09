@@ -19,7 +19,6 @@
             }
         ],
         "hebergement": "non",
-        "regimes": "vegetarien",
         "precisions_allergies": "Je suis intolérant aux œufs. ",
         "chanson": "Love me like you do, Ellie GOULDING",
         "suggestion_magique": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce feugiat rhoncus aliquam. Quisque fermentum risus eget enim congue, sed mollis mi accumsan.",
@@ -45,7 +44,6 @@
             }
         ],
         "hebergement": "non",
-        "regimes": "",
         "precisions_allergies": "Ut tincidunt urna a sollicitudin sagittis. Quisque a placerat ex, sed volutpat sem. Sed laoreet nibh non lorem volutpat, sit amet ultricies risus pharetra. ",
         "chanson": "Ti Amo d'Uberto TOZZI",
         "suggestion_magique": "Des pailletes",
@@ -71,10 +69,29 @@
             }
         ],
         "hebergement": "non",
-        "regimes": "gluten",
         "precisions_allergies": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada nisi lacus, at sollicitudin nibh consequat et. Fusce risus dolor, pulvinar sit amet imperdiet eu, commodo id arcu.",
         "chanson": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
         "suggestion_magique": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         "mot_maries": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada nisi lacus, at sollicitudin nibh consequat et. Fusce risus dolor, pulvinar sit amet imperdiet eu, commodo id arcu."
+    },
+    {
+        "id": "4def74bb6967991a6b68750fd3051d8e",
+        "date": "2025-06-09 12:14:58",
+        "prenom": "Piou",
+        "nom": "TEST",
+        "email": "tests-piou@yopmail.com",
+        "telephone": "+33 06.01.02.03.04",
+        "adresse": "12, Rue du Piou",
+        "code_postal": "42240",
+        "ville": "Paris",
+        "pays": "France",
+        "adultes": 1,
+        "enfants_present": "non",
+        "enfants": [],
+        "hebergement": "reco",
+        "precisions_allergies": "",
+        "chanson": "",
+        "suggestion_magique": "",
+        "mot_maries": ""
     }
 ]

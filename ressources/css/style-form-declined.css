@@ -10,7 +10,7 @@
 @import url('https://fonts.cdnfonts.com/css/anaphora-trial');
 
 /************************************************************************/
-/*								form-accept.html						*/
+/*								form-declined.html						*/
 /************************************************************************/
 body {
   margin: 0;
@@ -20,11 +20,12 @@ body {
   background-position: center;
   background-attachment: fixed;
   color: #333;
+  /* Fallback background si l'image n'est pas trouvée */
+  background-color: #f5f5f5;
 }
 
 .overlay {
-  background-color: rgba(255, 255, 255, 0.75);
-  /* Further increased transparency */
+  background-color: rgba(255, 255, 255, 0.85);
   padding: 40px 20px;
   max-width: 700px;
   margin: 80px auto;
@@ -34,14 +35,58 @@ body {
 
 h1 {
   text-align: center;
-  color: #EFA8B4;
+  color: #8DB1A8;
   font-family: 'RTL-Adam Script', serif;
-  font-size: 50px;
+  font-size: 45px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+.form-note {
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
+  margin-bottom: 15px;
+  margin-top: 5px;
+}
+
+.contact-info {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: rgba(141, 177, 168, 0.1);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.contact-info p {
+  margin: 10px 0;
+  color: #8DB1A8;
+}
+
+.contact-info a {
+  color: #8DB1A8;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
 }
 
 form {
   display: flex;
   flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 25px;
 }
 
 label {
@@ -67,44 +112,31 @@ textarea {
 input,
 textarea {
   border: 1px solid #8DB1A8;
-  /* Ajoute une bordure harmonisée */
 }
 
 input:focus,
 textarea:focus {
   outline: none;
-  /* Supprime le contour par défaut */
   border-color: #8DB1A8;
-  /* Bordure sur focus */
   box-shadow: 0 0 5px #8DB1A8;
-  /* Effet lumineux */
 }
 
 select {
   accent-color: #8DB1A8;
-  /* Change the selection color */
   background-color: white;
-  /* Fond blanc pour le champ */
   color: #333;
-  /* Couleur du texte */
   border: 1px solid #8DB1A8;
-  /* Bordure personnalisée */
 }
 
 select option {
   background-color: #FFF8F1;
-  /* Couleur de fond des options */
   color: #333;
-  /* Couleur du texte des options */
 }
 
 select:focus {
   outline: none;
-  /* Supprime le contour par défaut */
   border-color: #8DB1A8;
-  /* Bordure sur focus */
   box-shadow: 0 0 5px #8DB1A8;
-  /* Effet lumineux */
 }
 
 input.invalid,
@@ -129,7 +161,7 @@ textarea.invalid {
   width: 180px;
 }
 
-/*.checkbox-group,*/
+.checkbox-group,
 .radio-group {
   margin-top: 10px;
   display: flex;
@@ -137,108 +169,35 @@ textarea.invalid {
   gap: 10px 20px;
 }
 
-/*.checkbox-group label,*/
+.checkbox-group label,
 .radio-group label {
   display: flex;
   align-items: center;
   gap: 8px;
   font-weight: normal;
   margin: 0;
+  cursor: pointer;
 }
 
-/*.checkbox-group input[type="checkbox"],*/
+.checkbox-group input[type="checkbox"],
 .radio-group input[type="radio"] {
   appearance: auto;
   width: 18px;
   height: 18px;
   margin: 0;
-}
-
-.participants-section {
-  margin-top: 0px; /*20px;*/
-}
-
-.child-entry {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-  align-items: center;
-}
-
-.child-entry select,
-.child-entry input {
-  padding: 10px;
-  font-size: 1rem;
-}
-
-.child-entry select.age-select {
-  width: 90px;
-}
-
-.child-entry button {
-  background-color: transparent;
-  border: 2px solid #EFA8B4;
-  font-size: 1.2rem;
-  color: #EFA8B4;
-  cursor: pointer;
-  font-family: 'anaphora-trial';
-}
-
-.child-entry button:hover {
-  color: white;
-  background-color: #EFA8B4;
-}
-
-button[type="submit"] {
-  margin-top: 30px;
-  color: #EFA8B4;
-  background-color: rgba(255, 255, 255, 0.5);
-  /* Added transparency */
-  padding: 12px 25px;
-  font-size: 1rem;
-  border: 2px solid #EFA8B4;
-  border-radius: 0px;
-  cursor: pointer;
-  font-weight: bold;
-  font-family: 'anaphora-trial';
-  font-size: 1.2rem;
-}
-
-button[type="submit"]:hover {
-  color: white;
-  background-color: #EFA8B4;
-  font-family: 'anaphora-trial';
-}
-
-#add-child-btn {
-  margin-top: 10px;
-  border: 2px solid #8DB1A8;
-  color: #8DB1A8;
-  background-color: rgba(255, 255, 255, 0.5);
-  /* Added transparency */
-  padding: 8px 16px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: bold;
-  font-family: 'anaphora-trial';
-}
-
-#add-child-btn:hover {
-  color: white;
-  background-color: #8DB1A8;
-  font-family: 'anaphora-trial';
+  accent-color: #8DB1A8;
 }
 
 .custom-select {
   position: relative;
   display: inline-block;
-  padding-top: 0.5rem;
   width: 100%;
 }
 
 .custom-select select {
-  display: none;
-  /* Masque le select natif */
+  /* Afficher le select par défaut, il sera masqué par JS quand les custom selects sont initialisés */
+  display: block;
+  width: 100%;
 }
 
 .select-selected {
@@ -250,6 +209,23 @@ button[type="submit"]:hover {
   cursor: pointer;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
+}
+
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #8DB1A8 transparent transparent transparent;
+}
+
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #8DB1A8 transparent;
+  top: 7px;
 }
 
 .select-selected.select-arrow-active {
@@ -280,8 +256,39 @@ button[type="submit"]:hover {
   color: white;
 }
 
-.select-selected.select-arrow-active:after {
-  border-color: transparent transparent #8DB1A8 transparent;
+button[type="submit"] {
+  margin-top: 30px;
+  color: #8DB1A8;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 12px 25px;
+  font-size: 1rem;
+  border: 2px solid #8DB1A8;
+  border-radius: 0px;
+  cursor: pointer;
+  font-weight: bold;
+  font-family: 'anaphora-trial';
+  font-size: 1.2rem;
+}
+
+button[type="submit"]:hover {
+  color: white;
+  background-color: #8DB1A8;
+  font-family: 'anaphora-trial';
+}
+
+/* Animations pour les sections conditionnelles */
+#motif-autre-section,
+#children-absent-section,
+#video-details,
+#celebration-details {
+  transition: all 0.3s ease;
+}
+
+/* Icônes dans les labels */
+.checkbox-group label i,
+.radio-group label i {
+  margin-right: 5px;
+  color: #8DB1A8;
 }
 
 @media (max-width: 768px) {
@@ -292,6 +299,10 @@ button[type="submit"]:hover {
 
   h1 {
     font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
   }
 
   .inline-fields {
@@ -310,22 +321,19 @@ button[type="submit"]:hover {
     font-size: 0.9rem;
   }
 
-  button[type="submit"],
-  #add-child-btn {
+  button[type="submit"] {
     width: 100%;
     padding: 10px;
   }
 
-  .child-entry {
+  .checkbox-group,
+  .radio-group {
     flex-direction: column;
-    gap: 5px;
-  }
-
-  .child-entry select.age-select {
-    width: 100%;
+    gap: 10px;
   }
 }
 
+/* Messages de feedback */
 #form-feedback {
   padding: 15px;
   margin-bottom: 20px;
