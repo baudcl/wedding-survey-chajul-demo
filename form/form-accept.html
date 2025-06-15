@@ -5,13 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RSVP - Mariage à Palma</title>
-  <link rel="stylesheet" href="../ressources/css/style.css"> <!-- Fixed path -->
+  <link rel="stylesheet" href="../ressources/css/style.css">
   <link rel="stylesheet" href="../ressources/css/style-form-accepted.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script rel="script" src="../script/script-form-accepted.js"></script>
   <!-- Protéger le formulaire contre le spam -->
   <input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off">
-  <input type="hidden" name="timestamp" id="timestamp"> <!-- Détection de rapidité de soumission -->
+  <input type="hidden" name="timestamp" id="timestamp">
 </head>
 
 <body>
@@ -66,11 +66,11 @@
 
         <div class="participants-section">
           <div class="inline-fields">
-            <div style="margin-top:0;"> <!-- Nombre d'adultes -->
+            <div style="margin-top:0;" class="adults-select-container">
               <label style="margin-top:0;">Nombre d'adulte(s) <span
                   style="color: #EFA8B4; font-weight: bold;">*</span></label>
               <div class="custom-select">
-                <select name="adultes" class="inline-medium" required>
+                <select name="adultes" required>
                   <option value="">-- Choisir --</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
@@ -83,7 +83,7 @@
                 </select>
               </div>
             </div>
-            <div style="margin-top:0;"> <!-- Nombre d'enfants -->
+            <div style="margin-top:0; flex: 1;">
               <label style="margin-top:0;">Y aura-t-il des enfants ?</label>
               <div class="radio-group" style="accent-color: #8DB1A8;">
                 <label><input type="radio" id="enfants_oui" name="enfants_present" value="oui"
@@ -97,50 +97,27 @@
           <div id="children-section" style="display:none;">
             <label>Informations sur les enfants</label>
             <div id="children-entries">
-              <div class="child-entry">
-                <input type="text" name="prenom_enfant[]" placeholder="Prénom" disabled>
-                <div class="custom-select">
-                  <select name="age_enfant[]" class="age-select" disabled>
-                    <option value="">-- Âge --</option>
-                    <option value="0">0 ans</option>
-                    <option value="1">1 an</option>
-                    <option value="2">2 ans</option>
-                    <option value="3">3 ans</option>
-                    <option value="4">4 ans</option>
-                    <option value="5">5 ans</option>
-                    <option value="6">6 ans</option>
-                    <option value="7">7 ans</option>
-                    <option value="8">8 ans</option>
-                    <option value="9">9 ans</option>
-                    <option value="10">10 ans</option>
-                    <option value="11">11 ans</option>
-                    <option value="12">12 ans</option>
-                    <option value="13">13 ans</option>
-                    <option value="14">14 ans</option>
-                    <option value="15">15 ans</option>
-                    <option value="16">16 ans</option>
-                    <option value="17">17 ans</option>
-                    <option value="18">18 ans</option>
-                  </select>
-                </div>
-              </div>
+              <!-- Les enfants seront ajoutés dynamiquement ici -->
             </div>
             <button type="button" id="add-child-btn" onclick="addChild()">+ Ajouter un enfant</button>
           </div>
         </div>
       </div>
-      <label>Besoin d’aide pour l’hébergement ?</label>
+      
+      <label>Besoin d'aide pour l'hébergement ?</label>
       <div class="custom-select">
         <select name="hebergement" required>
-          <option value="non">Non, c’est réglé !</option>
+          <option value="non">Non, c'est réglé !</option>
           <option value="reco">Oui, des recommandations seraient top !</option>
-          <option value="coloc">On aimerait partager un logement avec d’autres invités</option>
+          <option value="coloc">On aimerait partager un logement avec d'autres invités</option>
         </select>
       </div>
+      
       <div class="form-group">
         <h3 style="margin-bottom: 0;">Allergies</h3>
         <textarea name="precisions_allergies" placeholder="Précisez vos allergies ici..."></textarea>
       </div>
+      
       <div class="form-group">
         <h3 style="margin-bottom: 0;">Vos suggestions</h3>
         <label>Une chanson à suggérer ?</label>
@@ -152,11 +129,13 @@
         <label>Un petit mot pour les mariés</label>
         <textarea name="mot_maries" rows="4"></textarea>
       </div>
+      
       <button class="button btn btn-pink" type="submit">ENVOYER MA RÉPONSE</button>
     </form>
   </div>
+  
   <footer>
-    <p>"Le bonheur n’est réel que lorsqu’il est partagé."</p>
+    <p>"Le bonheur n'est réel que lorsqu'il est partagé."</p>
     <p style="font-family: 'RTL-Adam Script', serif; font-size: 2rem;">Charlotte & Julien</p>
     <div style="margin-top: 20px;">
       <a href="#" style="color: white; margin: 0 10px;"><i class="fas fa-envelope"></i></a>

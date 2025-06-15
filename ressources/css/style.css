@@ -229,7 +229,7 @@ h3 {
 }
 
 footer {
-    background-image: url('ressources/images/footer-photo-01.jpg');
+    background-image: url('./ressources/images/footer-photo-01.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

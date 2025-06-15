@@ -316,6 +316,10 @@ if ($woff2_data || $woff_data || $ttf_data) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../ressources/css/style.css">
+    <link rel="stylesheet" href="../ressources/fonts/rtl-adam-script/stylesheet-rtl-adamscript.css">   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
     <title>Administration - Mariage de Charlotte & Julien</title>
     <style>
         body {
@@ -541,13 +545,10 @@ if ($woff2_data || $woff_data || $ttf_data) {
             }
         }
     </style>
-    <link rel="stylesheet" href="../ressources/css/style.css">
-    <link rel="stylesheet" href="../ressources/fonts/rtl-adam-script/stylesheet-rtl-adamscript.css">   
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
 </head>
 <body>
     <header>
-        <h1>Mariage de Charlotte & Julien</h1>
+        <h1 style="color: white">Mariage de Charlotte & Julien</h1>
         <p>Tableau de bord d'administration</p>
     </header>
     

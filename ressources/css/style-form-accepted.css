@@ -49,6 +49,7 @@ label {
   display: block;
 }
 
+/* Standardisation de la hauteur pour tous les champs */
 input,
 select,
 textarea {
@@ -62,49 +63,45 @@ textarea {
   box-sizing: border-box;
   appearance: none;
   background-color: white;
+  height: 44px; /* Hauteur fixe pour parfait alignement */
+  line-height: 1.2;
+}
+
+/* Exception pour textarea qui doit pouvoir être plus grand */
+textarea {
+  height: auto;
+  min-height: 80px;
+  resize: vertical;
 }
 
 input,
 textarea {
   border: 1px solid #8DB1A8;
-  /* Ajoute une bordure harmonisée */
 }
 
 input:focus,
 textarea:focus {
   outline: none;
-  /* Supprime le contour par défaut */
   border-color: #8DB1A8;
-  /* Bordure sur focus */
   box-shadow: 0 0 5px #8DB1A8;
-  /* Effet lumineux */
 }
 
 select {
   accent-color: #8DB1A8;
-  /* Change the selection color */
   background-color: white;
-  /* Fond blanc pour le champ */
   color: #333;
-  /* Couleur du texte */
   border: 1px solid #8DB1A8;
-  /* Bordure personnalisée */
 }
 
 select option {
   background-color: #FFF8F1;
-  /* Couleur de fond des options */
   color: #333;
-  /* Couleur du texte des options */
 }
 
 select:focus {
   outline: none;
-  /* Supprime le contour par défaut */
   border-color: #8DB1A8;
-  /* Bordure sur focus */
   box-shadow: 0 0 5px #8DB1A8;
-  /* Effet lumineux */
 }
 
 input.invalid,
@@ -129,7 +126,6 @@ textarea.invalid {
   width: 180px;
 }
 
-/*.checkbox-group,*/
 .radio-group {
   margin-top: 10px;
   display: flex;
@@ -137,7 +133,6 @@ textarea.invalid {
   gap: 10px 20px;
 }
 
-/*.checkbox-group label,*/
 .radio-group label {
   display: flex;
   align-items: center;
@@ -146,45 +141,57 @@ textarea.invalid {
   margin: 0;
 }
 
-/*.checkbox-group input[type="checkbox"],*/
 .radio-group input[type="radio"] {
   appearance: auto;
   width: 18px;
   height: 18px;
   margin: 0;
+  height: auto; /* Override pour les radio buttons */
 }
 
 .participants-section {
-  margin-top: 0px; /*20px;*/
+  margin-top: 0px;
 }
 
 .child-entry {
   display: flex;
   gap: 10px;
   margin-top: 10px;
-  align-items: center;
+  align-items: flex-start; /* Alignement en haut pour cohérence */
 }
 
 .child-entry select,
 .child-entry input {
-  padding: 10px;
+  padding: 12px;
   font-size: 1rem;
+  height: 44px; /* Hauteur fixe identique */
+  margin-top: 8px; /* Même marge que les autres champs */
 }
 
 .child-entry select.age-select {
-  width: 90px;
+  width: 120px; /* Légèrement agrandi pour le confort */
 }
 
-.child-entry button {
+/* Bouton de suppression d'enfant */
+.remove-child-btn {
   background-color: transparent;
   border: 2px solid #EFA8B4;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   color: #EFA8B4;
   cursor: pointer;
   font-family: 'anaphora-trial';
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 8px; /* Même marge que les champs pour alignement parfait */
+  padding: 0; /* Supprime le padding pour éviter les décalages */
 }
 
-.child-entry button:hover {
+.remove-child-btn:hover {
   color: white;
   background-color: #EFA8B4;
 }
@@ -193,7 +200,6 @@ button[type="submit"] {
   margin-top: 30px;
   color: #EFA8B4;
   background-color: rgba(255, 255, 255, 0.5);
-  /* Added transparency */
   padding: 12px 25px;
   font-size: 1rem;
   border: 2px solid #EFA8B4;
@@ -215,7 +221,6 @@ button[type="submit"]:hover {
   border: 2px solid #8DB1A8;
   color: #8DB1A8;
   background-color: rgba(255, 255, 255, 0.5);
-  /* Added transparency */
   padding: 8px 16px;
   border-radius: 20px;
   cursor: pointer;
@@ -229,6 +234,7 @@ button[type="submit"]:hover {
   font-family: 'anaphora-trial';
 }
 
+/* Custom select avec hauteur standardisée */
 .custom-select {
   position: relative;
   display: inline-block;
@@ -238,7 +244,6 @@ button[type="submit"]:hover {
 
 .custom-select select {
   display: none;
-  /* Masque le select natif */
 }
 
 .select-selected {
@@ -250,6 +255,10 @@ button[type="submit"]:hover {
   cursor: pointer;
   width: 100%;
   box-sizing: border-box;
+  height: 44px; /* Hauteur fixe identique aux autres champs */
+  display: flex;
+  align-items: center;
+  line-height: 1.2;
 }
 
 .select-selected.select-arrow-active {
@@ -273,6 +282,9 @@ button[type="submit"]:hover {
   padding: 10px;
   cursor: pointer;
   color: #333;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
 }
 
 .select-items div:hover {
@@ -282,6 +294,11 @@ button[type="submit"]:hover {
 
 .select-selected.select-arrow-active:after {
   border-color: transparent transparent #8DB1A8 transparent;
+}
+
+/* Amélioration pour la box du nombre d'adultes */
+.adults-select-container {
+  width: 220px; /* Agrandi pour que le texte tienne sur une ligne */
 }
 
 @media (max-width: 768px) {
@@ -300,7 +317,8 @@ button[type="submit"]:hover {
     gap: 10px;
   }
 
-  .inline-medium {
+  .inline-medium,
+  .adults-select-container {
     width: 100%;
   }
 
@@ -319,10 +337,17 @@ button[type="submit"]:hover {
   .child-entry {
     flex-direction: column;
     gap: 5px;
+    align-items: stretch;
   }
 
-  .child-entry select.age-select {
+  .child-entry select.age-select,
+  .remove-child-btn {
     width: 100%;
+  }
+
+  .remove-child-btn {
+    height: 44px;
+    margin-top: 5px;
   }
 }
 

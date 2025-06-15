@@ -1,4 +1,9 @@
 <?php
+// Chargement automatique de Composer et PHPMailer
+if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
+    require_once __DIR__ . '/../vendor/autoload.php';
+}
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -6,7 +11,7 @@ use PHPMailer\PHPMailer\Exception;
 $db_dir = __DIR__ . '/db';
 $db_file = $db_dir . '/responses.db';
 $json_file = $db_dir . '/responses.json';
-$log_file = __DIR__ . '/form.log'; // Les logs restent dans server
+$log_file = __DIR__ . '/form.log';
 
 // Créer le dossier db s'il n'existe pas
 if (!is_dir($db_dir)) {
@@ -25,7 +30,7 @@ error_reporting(E_ALL);
 
 // Fonctions utilitaires
 function log_message($message) {
-    $log_file = __DIR__ . '/form.log';
+    global $log_file;
     $date = date('Y-m-d H:i:s');
     file_put_contents($log_file, "[$date] $message\n", FILE_APPEND | LOCK_EX);
 }
@@ -120,95 +125,97 @@ try {
         'enfants_present' => $_POST['enfants_present'] ?? 'non',
         'enfants' => $enfants,
         'hebergement' => $_POST['hebergement'] ?? '',
+        'regimes' => isset($_POST['regime']) && is_array($_POST['regime']) ? implode(', ', $_POST['regime']) : '',
         'precisions_allergies' => $_POST['precisions_allergies'] ?? '',
         'chanson' => $_POST['chanson'] ?? '',
         'suggestion_magique' => $_POST['suggestion_magique'] ?? '',
         'mot_maries' => $_POST['mot_maries'] ?? ''
     ];
     
-    
-// 1. ENREGISTREMENT DANS LA BASE DE DONNÉES
-try {
-    // Connexion à la base de données
-    $db = new PDO('sqlite:' . $db_file);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // 1. ENREGISTREMENT DANS LA BASE DE DONNÉES
+    try {
+        // Connexion à la base de données
+        $db = new PDO('sqlite:' . $db_file);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Créer la table si elle n'existe pas
-    $db->exec("CREATE TABLE IF NOT EXISTS responses (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        submission_id TEXT,
-        date TEXT,
-        prenom TEXT,
-        nom TEXT,
-        email TEXT,
-        telephone TEXT,
-        adresse TEXT,
-        code_postal TEXT,
-        ville TEXT,
-        pays TEXT,
-        adultes INTEGER,
-        enfants_present TEXT,
-        enfants TEXT,
-        hebergement TEXT,
-        precisions_allergies TEXT,
-        chanson TEXT,
-        suggestion_magique TEXT,
-        mot_maries TEXT
-    )");
+        // Créer la table si elle n'existe pas
+        $db->exec("CREATE TABLE IF NOT EXISTS responses (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            submission_id TEXT,
+            date TEXT,
+            prenom TEXT,
+            nom TEXT,
+            email TEXT,
+            telephone TEXT,
+            adresse TEXT,
+            code_postal TEXT,
+            ville TEXT,
+            pays TEXT,
+            adultes INTEGER,
+            enfants_present TEXT,
+            enfants TEXT,
+            hebergement TEXT,
+            regimes TEXT,
+            precisions_allergies TEXT,
+            chanson TEXT,
+            suggestion_magique TEXT,
+            mot_maries TEXT
+        )");
 
-    // Vérifier si l'email existe déjà
-    $stmt = $db->prepare("SELECT COUNT(*) FROM responses WHERE email = :email");
-    $stmt->execute([':email' => $data['email']]);
-    if ($stmt->fetchColumn() > 0) {
-        log_message("Email en double détecté dans la BDD: " . $data['email']);
-        return_json(['success' => true, 'message' => 'Votre réponse a déjà été enregistrée. Merci !']);
+        // Vérifier si l'email existe déjà
+        $stmt = $db->prepare("SELECT COUNT(*) FROM responses WHERE email = :email");
+        $stmt->execute([':email' => $data['email']]);
+        if ($stmt->fetchColumn() > 0) {
+            log_message("Email en double détecté dans la BDD: " . $data['email']);
+            return_json(['success' => true, 'message' => 'Votre réponse a déjà été enregistrée. Merci !']);
+        }
+
+        // Préparer les données des enfants pour la base de données
+        $enfants_json = !empty($enfants) ? json_encode($enfants, JSON_UNESCAPED_UNICODE) : '';
+
+        // Insérer les données
+        $stmt = $db->prepare("INSERT INTO responses (
+            submission_id, date, prenom, nom, email, telephone, adresse, code_postal, ville, pays, 
+            adultes, enfants_present, enfants, hebergement, regimes, precisions_allergies, 
+            chanson, suggestion_magique, mot_maries
+        ) VALUES (
+            :submission_id, :date, :prenom, :nom, :email, :telephone, :adresse, :code_postal, :ville, :pays,
+            :adultes, :enfants_present, :enfants, :hebergement, :regimes, :precisions_allergies,
+            :chanson, :suggestion_magique, :mot_maries
+        )");
+
+        $stmt->execute([
+            ':submission_id' => $submission_id,
+            ':date' => $data['date'],
+            ':prenom' => $data['prenom'],
+            ':nom' => $data['nom'],
+            ':email' => $data['email'],
+            ':telephone' => $data['telephone'],
+            ':adresse' => $data['adresse'],
+            ':code_postal' => $data['code_postal'],
+            ':ville' => $data['ville'],
+            ':pays' => $data['pays'],
+            ':adultes' => $data['adultes'],
+            ':enfants_present' => $data['enfants_present'],
+            ':enfants' => $enfants_json,
+            ':hebergement' => $data['hebergement'],
+            ':regimes' => $data['regimes'],
+            ':precisions_allergies' => $data['precisions_allergies'],
+            ':chanson' => $data['chanson'],
+            ':suggestion_magique' => $data['suggestion_magique'],
+            ':mot_maries' => $data['mot_maries']
+        ]);
+
+        $lastInsertId = $db->lastInsertId();
+        log_message("Données enregistrées avec succès dans la base de données SQLite (ID: $lastInsertId)");
+        
+        if ($lastInsertId <= 0) {
+            throw new Exception("Erreur d'insertion : aucun ID retourné");
+        }
+    } catch (PDOException $e) {
+        log_message("Erreur SQLite: " . $e->getMessage());
+        throw new Exception("Erreur lors de l'enregistrement en base de données: " . $e->getMessage());
     }
-
-    // Préparer les données des enfants pour la base de données
-    $enfants_json = !empty($enfants) ? json_encode($enfants, JSON_UNESCAPED_UNICODE) : '';
-
-    // Insérer les données
-    $stmt = $db->prepare("INSERT INTO responses (
-        submission_id, date, prenom, nom, email, telephone, adresse, code_postal, ville, pays, 
-        adultes, enfants_present, enfants, hebergement, precisions_allergies, 
-        chanson, suggestion_magique, mot_maries
-    ) VALUES (
-        :submission_id, :date, :prenom, :nom, :email, :telephone, :adresse, :code_postal, :ville, :pays,
-        :adultes, :enfants_present, :enfants, :hebergement, :precisions_allergies,
-        :chanson, :suggestion_magique, :mot_maries
-    )");
-
-    $stmt->execute([
-        ':submission_id' => $submission_id,
-        ':date' => $data['date'],
-        ':prenom' => $data['prenom'],
-        ':nom' => $data['nom'],
-        ':email' => $data['email'],
-        ':telephone' => $data['telephone'],
-        ':adresse' => $data['adresse'],
-        ':code_postal' => $data['code_postal'],
-        ':ville' => $data['ville'],
-        ':pays' => $data['pays'],
-        ':adultes' => $data['adultes'],
-        ':enfants_present' => $data['enfants_present'],
-        ':enfants' => $enfants_json,
-        ':hebergement' => $data['hebergement'],
-        ':precisions_allergies' => $data['precisions_allergies'],
-        ':chanson' => $data['chanson'],
-        ':suggestion_magique' => $data['suggestion_magique'],
-        ':mot_maries' => $data['mot_maries']
-    ]);
-
-    $lastInsertId = $db->lastInsertId();
-    log_message("Données enregistrées avec succès dans la base de données SQLite (ID: $lastInsertId)");
-    
-    if ($lastInsertId <= 0) {
-        throw new Exception("Erreur d'insertion : aucun ID retourné");
-    }
-} catch (PDOException $e) {
-    log_message("Erreur SQLite: " . $e->getMessage());
-    throw new Exception("Erreur lors de l'enregistrement en base de données: " . $e->getMessage());
-}
     
     // 2. ENREGISTREMENT DANS LE FICHIER JSON (SAUVEGARDE)
     try {
@@ -217,17 +224,17 @@ try {
         if (file_exists($json_file) && filesize($json_file) > 0) {
             $json_content = file_get_contents($json_file);
             
-            if ($json_content[0] === '[') {
+            if ($json_content && $json_content[0] === '[') {
                 $all_responses = json_decode($json_content, true) ?: [];
-            } else {
-                // Tenter de récupérer les données d'un format non-standard
-                $all_responses = [];
             }
         }
         
         $all_responses[] = $data;
         $json_data = json_encode($all_responses, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-        file_put_contents($json_file, $json_data, LOCK_EX);
+        
+        if (file_put_contents($json_file, $json_data, LOCK_EX) === false) {
+            throw new Exception("Impossible d'écrire dans le fichier JSON");
+        }
         
         log_message("Données enregistrées avec succès dans le fichier JSON");
     } catch (Exception $e) {
@@ -235,35 +242,32 @@ try {
         // On continue quand même pour les emails
     }
     
-    // 3. ENVOI DES EMAILS
+    // 3. ENVOI DES EMAILS (optionnel)
     try {
         // Vérifier que PHPMailer est installé
-        if (!file_exists(__DIR__ . '/../vendor/autoload.php')) {
-            throw new Exception("Composer et/ou PHPMailer ne semblent pas être installés");
+        if (!class_exists('PHPMailer\PHPMailer\PHPMailer')) {
+            log_message("PHPMailer n'est pas installé - emails désactivés");
+            throw new Exception("PHPMailer non disponible");
         }
-        // Move these to the top of the file
         
-        // Vérifier si le fichier .env existe
+        // Charger les variables d'environnement
         if (file_exists(__DIR__ . '/.env')) {
             if (class_exists('Dotenv\Dotenv')) {
                 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
                 $dotenv->load();
-            } else {
-                log_message("Dotenv est requis mais n'est pas installé");
             }
-        } else {
-            log_message("Fichier .env manquant - utilisation des variables d'environnement par défaut");
         }
         
         // Configuration du SMTP
         $smtp_host = $_ENV['SMTP_HOST'] ?? 'smtp.gmail.com';
         $smtp_port = $_ENV['SMTP_PORT'] ?? 587;
-        $smtp_user = $_ENV['MAIL_USER'] ?? 'charlotteandjulien@gmail.com';
+        $smtp_user = $_ENV['MAIL_USER'] ?? '';
         $smtp_pass = $_ENV['MAIL_PASS'] ?? '';
         $couple_email = $_ENV['COUPLE_EMAIL'] ?? 'charlotteandjulien@gmail.com';
         
-        if (empty($smtp_pass)) {
-            throw new Exception("Mot de passe SMTP non configuré - vérifiez le fichier .env");
+        if (empty($smtp_pass) || empty($smtp_user)) {
+            log_message("Configuration email incomplète - emails désactivés");
+            throw new Exception("Configuration email manquante");
         }
         
         // Préparation du mail
@@ -344,6 +348,9 @@ try {
             $mail->clearAddresses();
             $mail->addAddress($couple_email);
             $mail->Subject = "[RSVP] Nouvelle réponse - " . $data['prenom'] . " " . $data['nom'];
+            
+            $regimes_html = !empty($data['regimes']) ? htmlspecialchars($data['regimes']) : 'Aucun';
+            
             $mail->Body = "
                 <html>
                 <head>

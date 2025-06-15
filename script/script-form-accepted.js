@@ -29,6 +29,7 @@ function addChild() {
                 ${Array.from({ length: 19 }, (_, i) => `<option value="${i}">${i} ans</option>`).join('')}
             </select>
         </div>
+        <button type="button" class="remove-child-btn" onclick="removeChild(this)">×</button>
     `;
     container.appendChild(div);
 
@@ -73,10 +74,15 @@ function initCustomSelect(customSelect) {
 
 function removeChild(button) {
     const container = document.getElementById('children-entries');
-    button.parentElement.remove();
-    if (container.children.length === 0) {
-        document.getElementById('children-section').style.display = 'none';
-        document.getElementById('enfants_non').checked = true;
+    const childEntry = button.closest('.child-entry');
+    
+    if (childEntry && container.contains(childEntry)) {
+        childEntry.remove();
+        
+        // Si plus d'enfants, ajouter automatiquement un enfant vide
+        if (container.children.length === 0) {
+            addChild();
+        }
     }
 }
 
