@@ -252,5 +252,5 @@ try {
 }
 
 log_message("=== Opération terminée avec succès ===");
-echo '<p><a href="admin.php" style="background-color: #8DB1A8; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Retourner à l\'administration</a></p>';
+echo '<p><a href="admin.php" style="background-color: var(--color-primary); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Retourner à l\'administration</a></p>';
 ?>

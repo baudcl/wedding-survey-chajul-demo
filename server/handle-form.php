@@ -125,7 +125,6 @@ try {
         'enfants_present' => $_POST['enfants_present'] ?? 'non',
         'enfants' => $enfants,
         'hebergement' => $_POST['hebergement'] ?? '',
-        'regimes' => isset($_POST['regime']) && is_array($_POST['regime']) ? implode(', ', $_POST['regime']) : '',
         'precisions_allergies' => $_POST['precisions_allergies'] ?? '',
         'chanson' => $_POST['chanson'] ?? '',
         'suggestion_magique' => $_POST['suggestion_magique'] ?? '',
@@ -155,7 +154,6 @@ try {
             enfants_present TEXT,
             enfants TEXT,
             hebergement TEXT,
-            regimes TEXT,
             precisions_allergies TEXT,
             chanson TEXT,
             suggestion_magique TEXT,
@@ -176,11 +174,11 @@ try {
         // Insérer les données
         $stmt = $db->prepare("INSERT INTO responses (
             submission_id, date, prenom, nom, email, telephone, adresse, code_postal, ville, pays, 
-            adultes, enfants_present, enfants, hebergement, regimes, precisions_allergies, 
+            adultes, enfants_present, enfants, hebergement, precisions_allergies, 
             chanson, suggestion_magique, mot_maries
         ) VALUES (
             :submission_id, :date, :prenom, :nom, :email, :telephone, :adresse, :code_postal, :ville, :pays,
-            :adultes, :enfants_present, :enfants, :hebergement, :regimes, :precisions_allergies,
+            :adultes, :enfants_present, :enfants, :hebergement, :precisions_allergies,
             :chanson, :suggestion_magique, :mot_maries
         )");
 
@@ -199,7 +197,6 @@ try {
             ':enfants_present' => $data['enfants_present'],
             ':enfants' => $enfants_json,
             ':hebergement' => $data['hebergement'],
-            ':regimes' => $data['regimes'],
             ':precisions_allergies' => $data['precisions_allergies'],
             ':chanson' => $data['chanson'],
             ':suggestion_magique' => $data['suggestion_magique'],
@@ -308,7 +305,7 @@ try {
                     <style>
                         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
                         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-                        h2 { color: #8DB1A8; }
+                        h2 { color: var(--color-primary); }
                         .footer { margin-top: 30px; font-style: italic; color: #777; }
                         ul { padding-left: 20px; }
                         li { margin-bottom: 5px; }
@@ -348,8 +345,6 @@ try {
             $mail->clearAddresses();
             $mail->addAddress($couple_email);
             $mail->Subject = "[RSVP] Nouvelle réponse - " . $data['prenom'] . " " . $data['nom'];
-            
-            $regimes_html = !empty($data['regimes']) ? htmlspecialchars($data['regimes']) : 'Aucun';
             
             $mail->Body = "
                 <html>

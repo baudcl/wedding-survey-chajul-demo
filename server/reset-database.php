@@ -22,8 +22,8 @@ if (!isset($_GET['confirm']) || $_GET['confirm'] !== 'yes') {
     echo '<h1>Réinitialisation de la base de données</h1>';
     echo '<p style="color: red; font-weight: bold;">Attention : Cette action va effacer toutes les données de la base de données.</p>';
     echo '<p>Souhaitez-vous continuer ?</p>';
-    echo '<a href="?confirm=yes" style="background-color: #8DB1A8; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-right: 10px;">Oui, réinitialiser la base de données</a>';
-    echo '<a href="admin.php" style="background-color: #EFA8B4; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Non, retourner à l\'administration</a>';
+    echo '<a href="?confirm=yes" style="background-color: var(--color-primary); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-right: 10px;">Oui, réinitialiser la base de données</a>';
+    echo '<a href="admin.php" style="background-color: var(--color-secondary); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Non, retourner à l\'administration</a>';
     exit;
 }
 
@@ -107,9 +107,9 @@ try {
     // Proposer options
     echo '<h2>Réinitialisation terminée</h2>';
     echo '<p>La base de données a été réinitialisée avec succès. Que souhaitez-vous faire maintenant ?</p>';
-    echo '<a href="admin.php" style="background-color: #8DB1A8; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-right: 10px;">Retourner à l\'administration</a>';
-    echo '<a href="sync_database.php" style="background-color: #EFA8B4; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Synchroniser les données depuis le fichier JSON</a>';
-    
+    echo '<a href="admin.php" style="background-color: var(--color-primary); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-right: 10px;">Retourner à l\'administration</a>';
+    echo '<a href="sync_database.php" style="background-color: var(--color-secondary); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Synchroniser les données depuis le fichier JSON</a>';
+
 } catch (Exception $e) {
     log_message("Erreur: " . $e->getMessage());
     log_message("Trace: " . $e->getTraceAsString());

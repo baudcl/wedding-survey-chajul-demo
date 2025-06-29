@@ -2,6 +2,11 @@
 session_start();
 
 // Simple authentication
+if (isset($_GET['logout'])) {
+    unset($_SESSION['admin_logged_in']);
+    header('Location: admin.php');
+    exit;
+}
 if (!isset($_SESSION['admin_logged_in'])) {
     header('Location: admin.php');
     exit;
@@ -441,7 +446,9 @@ if (isset($_FILES['csv_file']) && $_FILES['csv_file']['error'] === UPLOAD_ERR_OK
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des invités - Mariage Charlotte & Julien</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../ressources/css/theme-variables.css">
+    <link rel="stylesheet" href="../ressources/css/style.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../ressources/css/style.css">
     <style>
         :root {
             --primary: #8DB1A8;
@@ -573,13 +580,13 @@ if (isset($_FILES['csv_file']) && $_FILES['csv_file']['error'] === UPLOAD_ERR_OK
         
         .message.success {
             background-color: #e8f5e9;
-            color: #2e7d32;
+            color: var(--color-success);
             border: 1px solid #a5d6a7;
         }
         
         .message.error {
             background-color: #ffebee;
-            color: #c62828;
+            color: var(--color-error);
             border: 1px solid #ef9a9a;
         }
         
@@ -831,7 +838,7 @@ if (isset($_FILES['csv_file']) && $_FILES['csv_file']['error'] === UPLOAD_ERR_OK
                         $a_confirme = $stmt->fetchColumn() > 0;
                         
                         // Trouver la couleur du groupe
-                        $couleur_groupe = '#8DB1A8';
+                        $couleur_groupe = 'var(--color-primary)';
                         foreach ($groupes as $groupe) {
                             if ($groupe['nom'] === $invite['groupe']) {
                                 $couleur_groupe = $groupe['couleur'];
@@ -992,7 +999,7 @@ if (isset($_FILES['csv_file']) && $_FILES['csv_file']['error'] === UPLOAD_ERR_OK
                 
                 <div class="form-group">
                     <label>Couleur</label>
-                    <input type="color" name="couleur_groupe" value="#8DB1A8">
+                    <input type="color" name="couleur_groupe" value="var(--color-primary)">
                 </div>
                 
                 <button type="submit" class="btn btn-primary">Créer le groupe</button>
@@ -1207,5 +1214,6 @@ if (isset($_FILES['csv_file']) && $_FILES['csv_file']['error'] === UPLOAD_ERR_OK
         <?php endforeach; ?>
         <?php endif; ?>
     </script>
+    <script src="../config/theme-config.js"></script>
 </body>
 </html>

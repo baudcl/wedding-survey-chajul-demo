@@ -58,7 +58,7 @@ if (!$is_cli && !isset($_GET['confirm'])) {
     echo '<h1>Réinitialisation de la base de données</h1>';
     echo '<p style="color: red; font-weight: bold;">ATTENTION : Cette action va effacer toutes les données de la base de données.</p>';
     echo '<p>Voulez-vous continuer ?</p>';
-    echo '<a href="?confirm=yes" style="background-color: #8DB1A8; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-right: 10px;">Oui, réinitialiser</a>';
+    echo '<a href="?confirm=yes" style="background-color: var(--color-primary); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-right: 10px;">Oui, réinitialiser</a>';
     echo '<a href="admin.php" style="background-color: #EFA8B4; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Annuler</a>';
     exit;
 }
@@ -156,8 +156,8 @@ log_message("=== Réinitialisation terminée avec succès ===");
 
 // Si on n'est pas en mode CLI, afficher un lien pour revenir à l'administration
 if (!$is_cli) {
-    echo '<p><a href="admin.php" style="background-color: #8DB1A8; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Retourner à l\'administration</a>';
-    echo '<a href="sync_cli.php" style="background-color: #EFA8B4; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-left: 10px;">Synchroniser les données</a></p>';
+    echo '<p><a href="admin.php" style="background-color: var(--color-primary); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">Retourner à l\'administration</a>';
+    echo '<a href="sync_cli.php" style="background-color: var(--color-secondary); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-left: 10px;">Synchroniser les données</a></p>';
 }
 
 exit(0);

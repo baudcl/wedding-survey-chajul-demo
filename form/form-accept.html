@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RSVP - Mariage à Palma</title>
+  <link rel="stylesheet" href="../ressources/css/theme-variables.css">
   <link rel="stylesheet" href="../ressources/css/style.css">
   <link rel="stylesheet" href="../ressources/css/style-form-accepted.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -26,19 +27,19 @@
         <h3 style="margin-bottom: 0;">Vos informations</h3>
         <div class="inline-fields">
           <div style="width: 100%;">
-            <label>Prénom <span style="color: #EFA8B4; font-weight: bold;">*</span></label>
+            <label>Prénom <span style="color: var(--color-secondary); font-weight: bold;">*</span></label>
             <input type="text" name="prenom" required>
           </div>
           <div style="width: 100%;">
-            <label>Nom <span style="color: #EFA8B4; font-weight: bold;">*</span></label>
+            <label>Nom <span style="color: var(--color-secondary); font-weight: bold;">*</span></label>
             <input type="text" name="nom" required>
           </div>
         </div>
 
-        <label>Adresse e-mail <span style="color: #EFA8B4; font-weight: bold;">*</span></label>
+        <label>Adresse e-mail <span style="color: var(--color-secondary); font-weight: bold;">*</span></label>
         <input type="email" name="email" required>
 
-        <label>Numéro de téléphone <span style="color: #EFA8B4; font-weight: bold;">*</span></label>
+        <label>Numéro de téléphone <span style="color: var(--color-secondary); font-weight: bold;">*</span></label>
         <div class="inline-fields">
           <div class="custom-select">
             <select name="indicatif" class="inline-medium" required>
@@ -52,7 +53,7 @@
           </div>
         </div>
 
-        <label>Adresse postale <span style="color: #EFA8B4; font-weight: bold;">*</span></label>
+        <label>Adresse postale <span style="color: var(--color-secondary); font-weight: bold;">*</span></label>
         <input type="text" name="adresse" placeholder="N° et nom de rue" required>
         <div class="inline-fields">
           <div><input type="text" name="code_postal" placeholder="Code postal" required></div>
@@ -68,7 +69,7 @@
           <div class="inline-fields">
             <div style="margin-top:0;" class="adults-select-container">
               <label style="margin-top:0;">Nombre d'adulte(s) <span
-                  style="color: #EFA8B4; font-weight: bold;">*</span></label>
+                  style="color: var(--color-secondary); font-weight: bold;">*</span></label>
               <div class="custom-select">
                 <select name="adultes" required>
                   <option value="">-- Choisir --</option>
@@ -85,7 +86,7 @@
             </div>
             <div style="margin-top:0; flex: 1;">
               <label style="margin-top:0;">Y aura-t-il des enfants ?</label>
-              <div class="radio-group" style="accent-color: #8DB1A8;">
+              <div class="radio-group" style="accent-color: var(--color-primary);">
                 <label><input type="radio" id="enfants_oui" name="enfants_present" value="oui"
                     onclick="toggleChildren(true)"> Oui, je viens avec des enfants</label>
                 <label><input type="radio" id="enfants_non" name="enfants_present" value="non"
@@ -143,6 +144,8 @@
       <a href="#" style="color: white; margin: 0 10px;"><i class="fab fa-instagram"></i></a>
     </div>
   </footer>
+
+    <script src="config/theme-config.js"></script>
 </body>
 
 </html>

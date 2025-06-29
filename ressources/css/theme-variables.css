@@ -1,0 +1,116 @@
+/* Variables CSS du thème - Généré automatiquement par theme-config.js */
+
+:root {
+    /* Couleurs - modifiables via theme-config.js */
+    --color-primary: #8DB1A8;
+    --color-secondary: #EFA8B4;
+    --color-accent: #EB964D;
+    --color-background: #FFF8F1;
+    --color-backgroundAlt: #FDEEE4;
+    --color-text: #333333;
+    --color-white: #FFFFFF;
+    --color-border: #DDDDDD;
+    --color-error: #D9534F;
+    --color-success: #2E7D32;
+    
+    /* Polices - modifiables via theme-config.js */
+    --font-decorative: 'RTL-Adam Script', cursive;
+    --font-heading: 'Lato', sans-serif;
+    --font-body: 'Forum', serif;
+    --font-alternative: 'Montserrat', sans-serif;
+    
+    /* Poids des polices */
+    --font-weight-decorative: normal;
+    --font-weight-heading: 400;
+    --font-weight-body: normal;
+    --font-weight-alternative: 300, 400, 600;
+    
+    /* Espacements */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 20px;
+    --spacing-lg: 30px;
+    --spacing-xl: 40px;
+    --spacing-xxl: 60px;
+    
+    /* Bordures */
+    --radius-none: 0px;
+    --radius-small: 5px;
+    --radius-medium: 10px;
+    --radius-large: 20px;
+    --radius-full: 50%;
+    
+    --border-thin: 1px;
+    --border-medium: 2px;
+    --border-thick: 3px;
+    
+    /* Ombres */
+    --shadow-small: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --shadow-large: 0 10px 30px rgba(0, 0, 0, 0.15);
+    --shadow-glow: 0 0 20px rgba(0, 0, 0, 0.1);
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* Classes utilitaires pour appliquer le thème */
+
+/* Couleurs de fond */
+.bg-primary { background-color: var(--color-primary); }
+.bg-secondary { background-color: var(--color-secondary); }
+.bg-accent { background-color: var(--color-accent); }
+.bg-background { background-color: var(--color-background); }
+.bg-backgroundAlt { background-color: var(--color-backgroundAlt); }
+
+/* Couleurs de texte */
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-accent { color: var(--color-accent); }
+.text-white { color: var(--color-white); }
+
+/* Bordures */
+.border-primary { border-color: var(--color-primary); }
+.border-secondary { border-color: var(--color-secondary); }
+.border-accent { border-color: var(--color-accent); }
+
+/* Polices */
+.font-decorative { font-family: var(--font-decorative); }
+.font-heading { font-family: var(--font-heading); }
+.font-body { font-family: var(--font-body); }
+.font-alternative { font-family: var(--font-alternative); }
+
+/* Espacements */
+.p-xs { padding: var(--spacing-xs); }
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+.p-xl { padding: var(--spacing-xl); }
+.p-xxl { padding: var(--spacing-xxl); }
+
+.m-xs { margin: var(--spacing-xs); }
+.m-sm { margin: var(--spacing-sm); }
+.m-md { margin: var(--spacing-md); }
+.m-lg { margin: var(--spacing-lg); }
+.m-xl { margin: var(--spacing-xl); }
+.m-xxl { margin: var(--spacing-xxl); }
+
+/* Arrondis */
+.rounded-none { border-radius: var(--radius-none); }
+.rounded-small { border-radius: var(--radius-small); }
+.rounded-medium { border-radius: var(--radius-medium); }
+.rounded-large { border-radius: var(--radius-large); }
+.rounded-full { border-radius: var(--radius-full); }
+
+/* Ombres */
+.shadow-small { box-shadow: var(--shadow-small); }
+.shadow-medium { box-shadow: var(--shadow-medium); }
+.shadow-large { box-shadow: var(--shadow-large); }
+.shadow-glow { box-shadow: var(--shadow-glow); }
+
+/* Transitions */
+.transition-fast { transition: all var(--transition-fast); }
+.transition-normal { transition: all var(--transition-normal); }
+.transition-slow { transition: all var(--transition-slow); }

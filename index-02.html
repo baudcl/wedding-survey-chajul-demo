@@ -8,36 +8,25 @@
     <meta name="theme-color" content="var(--color-background)">
     <title>Charlotte & Julien - Mariage</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="./ressources/css/style.css"> <!-- Fixed path -->
+    <link rel="stylesheet" href="./ressources/css/theme-variables-02.css">
+    <link rel="stylesheet" href="./ressources/css/style-02.css"> <!-- Fixed path -->
 </head>
 
 <body>
     <div class="wrapper">
         <!-- START Home Section -->
-        <section id="accueil" class="hero">
-            <div class="home-container">
-                <div class="home-box image-box">
-                    <img src="./ressources/images/home-photo-03.png" alt="Charlotte & Julien">
-                </div>
-                <div class="home-box">
-                    <h1>Charlotte</h1>
-                    <h1 class="ampersand">&</h1>
-                    <h1>Julien</h1>
-                    <!--  <h1 style="margin-top: -40px; font-size: clamp(2rem, 8vw, 8rem);">Julien</h1> -->
-                    <h2 style="font-size: clamp(1rem, 4vw, 3rem);">On se marie !</h2>
-                    <!-- 
-                    <div class="date">Le 27 Juin 2026</div>
-                    <div class="date">à Palma de Majorque, Islas Baleares</div>
-                    -->
-                    <div class="btn-container">
-                        <a href="#rsvp" class="btn btn-pink">SAVE THE DATE</a>
-                        <a href="#infos" class="btn btn-green">+ D'INFOS</a>
-                    </div>
+        <section id="accueil" class="fade-in hero-bg section-gradient">
+            <div class="home-content">
+                <h1>Charlotte <span class="ampersand">&</span> Julien</h1>
+                <h2>On se marie !</h2>
+                <div class="btn-container">
+                    <a href="#rsvp" class="btn btn-blue">SAVE THE DATE</a>
+                    <a href="#infos" class="btn btn-pink">+ D'INFOS</a>
                 </div>
             </div>
         </section> <!-- END Home Section -->
 
-        <section id="infos" style="background-color: var(--color-backgroundAlt);" class="fade-in"> <!-- class="hero">-->
+        <section id="infos" class="fade-in section-gradient" style="background-color: var(--color-primary); position: relative;">
             <div class="container" id="infos">
                 <h2 class="section-title">Notre Grand Jour</h2>
                 <div class="details">
@@ -62,9 +51,16 @@
                             lieu de
                             réception.
                         </p>
-                        <a href="#" class="btn btn-pink">Voir les options</a>
+                        <a href="#" class="btn btn-blue">Voir les options</a>
                     </div>
                 </div>
+            </div>
+            <!-- Séparateur vague avec icône -->
+            <div class="wave-separator">
+                <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="wave-svg">
+                    <path d="M0,40 Q360,120 720,40 Q1080,-40 1440,40 L1440,120 L0,120 Z" fill="var(--color-backgroundAlt)"/>
+                </svg>
+                <img src="./ressources/images/icons/wedding-icon-arrow-02.png" alt="arrow" class="wave-icon">
             </div>
         </section>
         <!--
@@ -76,20 +72,22 @@
             <p>Après plusieurs années de complicité, de rires et d'aventures, ils ont décidé de s'unir pour la vie.</p>
             <p>Rejoignez-les pour une journée inoubliable, remplie d'amour, de rires et de souvenirs.</p>
         </div> -->
-        <div class="container fade-in" id="rsvp">
-            <h2 class="section-title" style="color: var(--color-primary);">Nous serions heureux de
-                vous compter parmi nous !</h2>
-            <h1 class="section-title">Le 27 Juin 2026</h1>
-            <h1 class="section-title subtitle">à Palma De Majorque, Îles Baléares</h1>
+        <section id="rsvp" class="fade-in">
+            <div class="container">
+                <h2 class="section-title" style="color: var(--color-primary);">Nous serions heureux de
+                    vous compter parmi nous !</h2>
+                <h1 class="section-title">Le 27 Juin 2026</h1>
+                <h1 class="section-title subtitle">à Palma De Majorque, Îles Baléares</h1>
             <div style="text-align: center; max-width: 800px; margin: 0 auto;">
                 <a href="#" class="btn btn-pink" style="margin-top: 30px;"
                     onclick="openCaptchaModal('form/form-accept.html')">J'ACCEPTE AVEC PLAISIR</a>
-                <a href="#" class="btn btn-green" style="margin-top: 30px;"
+                <a href="#" class="btn btn-blue" style="margin-top: 30px;"
                     onclick="openCaptchaModal('form/form-decline.html')">JE DÉCLINE AVEC REGRET</a>
                 <p>Nous attendons votre réponse <u>AU PLUS TARD</u> le 20 janvier 2026
                     </br>en remplissant notre formulaire en ligne.</p>
             </div>
         </div>
+        </section>
 
         <div id="captcha-modal" class="modal" style="display: none;">
             <div class="modal-content">
@@ -98,12 +96,12 @@
                 <div id="captcha-code" style="font-size: 1.5rem; font-weight: bold; margin-bottom: 10px;"></div>
                 <input type="text" id="captcha-input" placeholder="Entrez le code" maxlength="6">
                 <p id="captcha-error" style="color: red; display: none;">Code incorrect. Veuillez réessayer.</p>
-                <button class="btn btn-green" onclick="verifyCaptcha()">Valider</button>
+                <button class="btn btn-blue" onclick="verifyCaptcha()">Valider</button>
                 <button class="btn btn-pink" onclick="closeCaptchaModal()">Annuler</button>
             </div>
         </div>
 
-        <footer style="width: 100%; height: auto; background-image: url(ressources/images/footer-photo-01.jpg);">
+        <footer class="footer">
             <p>"Le bonheur n’est réel que lorsqu’il est partagé."</p>
             <p style="font-family: 'RTL-Adam Script', serif; font-size: 2rem;">Charlotte & Julien</p>
             <div style="margin-top: 20px;">
@@ -120,7 +118,8 @@
             </div>
         </footer>
     </div>
-    <script src="config/theme-config.js"></script>
+
+    <script src="config/theme-config-02.js"></script>
     <script src="script/captcha.js"></script>
     <script src="script/script-transition-fadein.js"></script>
 </body>

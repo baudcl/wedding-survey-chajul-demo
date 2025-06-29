@@ -2,6 +2,11 @@
 session_start();
 
 // Simple authentication
+if (isset($_GET['logout'])) {
+    unset($_SESSION['admin_logged_in']);
+    header('Location: admin.php');
+    exit;
+}
 if (!isset($_SESSION['admin_logged_in'])) {
     header('Location: admin.php');
     exit;
@@ -416,8 +421,8 @@ if (isset($_GET['export']) && $_GET['export'] === 'pdf') {
         <style>
             body { font-family: Arial, sans-serif; }
             .table-plan { page-break-after: always; margin-bottom: 30px; }
-            h1 { text-align: center; color: #8DB1A8; }
-            h2 { color: #EFA8B4; }
+            h1 { text-align: center; color: var(--color-primary); }
+            h2 { color: var(--color-secondary); }
             .guest-list { margin-left: 20px; }
             .guest { padding: 5px 0; }
             .child { font-style: italic; color: #666; }
@@ -478,8 +483,10 @@ if (isset($_GET['export']) && $_GET['export'] === 'pdf') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plan de table - Mariage Charlotte & Julien</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Plan de table - Mariage Charlotte & Julien</title>    
+    <link rel="stylesheet" href="../ressources/css/theme-variables.css">
+    <link rel="stylesheet" href="../ressources/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         :root {
             --primary: #8DB1A8;
@@ -1585,5 +1592,6 @@ if (isset($_GET['export']) && $_GET['export'] === 'pdf') {
             }
         });
     </script>
+    <script src="../config/theme-config.js"></script>
 </body>
 </html>

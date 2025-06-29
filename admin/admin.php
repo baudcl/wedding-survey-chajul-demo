@@ -3,14 +3,29 @@ session_start();
 
 // Simple authentication
 if (!isset($_SESSION['admin_logged_in'])) {
-    if (isset($_POST['password']) && $_POST['password'] === 'admin123') { // À remplacer par un mot de passe sécurisé
+    if (isset($_POST['password']) && $_POST['password'] === 'admin123') {
         $_SESSION['admin_logged_in'] = true;
     } else {
-        echo '<form method="POST" style="text-align: center; margin-top: 100px;">
-                <h2 style="color: #8DB1A8;">Administration - Mariage de Charlotte & Julien</h2>
-                <input type="password" name="password" placeholder="Entrez le mot de passe" style="padding: 10px; font-size: 1rem; border: 1px solid #8DB1A8; border-radius: 5px;">
-                <button type="submit" style="padding: 10px 20px; font-size: 1rem; background-color: #8DB1A8; color: white; border: none; border-radius: 5px; cursor: pointer;">Connexion</button>
-              </form>';
+        ?>
+        <!DOCTYPE html>
+        <html lang="fr">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Connexion Admin</title>
+            <link rel="stylesheet" href="../ressources/css/theme-variables.css">
+            <link rel="stylesheet" href="../ressources/css/style.css">
+        </head>
+        <body>
+            <form method="POST" class="admin-login-form">
+                <h2>Administration<br/>Mariage de Charlotte & Julien</h2>
+                <input type="password" name="password" placeholder="Entrez le mot de passe" required>
+                <br>
+                <button type="submit">Connexion</button>
+            </form>
+        </body>
+        </html>
+        <?php
         exit;
     }
 }
@@ -217,9 +232,9 @@ if (isset($_GET['export_enfants']) && $_GET['export_enfants'] === 'csv') {
 $colors = [
     'primary' => '#8DB1A8',
     'secondary' => '#EFA8B4',
-    'background' => '#FFF8F1',
-    'text' => '#333333',
-    'border' => '#dddddd'
+    'background' => 'var(--color-background)',
+    'text' => 'var(--color-text)',
+    'border' => 'var(--color-border)'
 ];
 
 // Définir le chemin absolu vers la racine du site
@@ -316,10 +331,10 @@ if ($woff2_data || $woff_data || $ttf_data) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="../ressources/css/theme-variables.css">
     <link rel="stylesheet" href="../ressources/css/style.css">
     <link rel="stylesheet" href="../ressources/fonts/rtl-adam-script/stylesheet-rtl-adamscript.css">   
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Administration - Mariage de Charlotte & Julien</title>
     <style>
         body {
@@ -569,7 +584,7 @@ if ($woff2_data || $woff_data || $ttf_data) {
                     <i class="fas fa-users" style="margin-right: 10px;"></i>
                     Gérer la liste des invités
                 </a>
-                <a href="admin-table-map.php" class="export-button" style="min-width: 200px; background-color: #EFA8B4;">
+                <a href="admin-table-map.php" class="export-button" style="min-width: 200px; background-color:var(--color-secondary);">
                     <i class="fas fa-chair" style="margin-right: 10px;"></i>
                     Créer le plan de table
                 </a>
@@ -645,7 +660,7 @@ if ($woff2_data || $woff_data || $ttf_data) {
                                 <th>Téléphone</th>
                                 <th>Adultes</th>
                                 <th>Enfants</th>
-                                <th style="background-color: #EFA8B4; color: white;">Total</th>
+                                <th style="background-color:var(--color-secondary); color: white;">Total</th>
                                 <th>Hébergement</th>
                                 <th>Allergies</th>
                             </tr>
@@ -671,7 +686,7 @@ if ($woff2_data || $woff_data || $ttf_data) {
                                     <td><?= htmlspecialchars($response['telephone']) ?></td>
                                     <td><?= htmlspecialchars($response['adultes']) ?></td>
                                     <td><?= $response['enfants_formatted'] ?></td>
-                                    <td style="background-color: rgba(239, 168, 180, 0.2); font-weight: bold; color: #EFA8B4; text-align: center"><?= $response['total_invites'] ?></td>
+                                    <td style="background-color: rgba(239, 168, 180, 0.2); font-weight: bold; color: var(--color-secondary); text-align: center"><?= $response['total_invites'] ?></td>
                                     <td><?= htmlspecialchars($response['hebergement']) ?></td>
                                     <td><?= htmlspecialchars($response['precisions_allergies'] ?: 'Aucune') ?></td>
                                 </tr>
@@ -986,5 +1001,6 @@ if ($woff2_data || $woff_data || $ttf_data) {
         }, 1000);
     });
 </script>
+<script src="../config/theme-config.js"></script>
 </body>
 </html>
